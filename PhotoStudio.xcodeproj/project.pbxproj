@@ -1,0 +1,469 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E89B34731502CECD00740636 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34721502CECD00740636 /* UIKit.framework */; };
+		E89B34751502CECD00740636 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34741502CECD00740636 /* Foundation.framework */; };
+		E89B34771502CECD00740636 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34761502CECD00740636 /* CoreGraphics.framework */; };
+		E89B347D1502CECD00740636 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E89B347B1502CECD00740636 /* InfoPlist.strings */; };
+		E89B347F1502CECD00740636 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E89B347E1502CECD00740636 /* main.m */; };
+		E89B34831502CECD00740636 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E89B34821502CECD00740636 /* AppDelegate.m */; };
+		E89B34861502CECD00740636 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E89B34841502CECD00740636 /* MainStoryboard.storyboard */; };
+		E89B34891502CECD00740636 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E89B34881502CECD00740636 /* ViewController.m */; };
+		E89B34911502CECD00740636 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34901502CECD00740636 /* SenTestingKit.framework */; };
+		E89B34921502CECD00740636 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34721502CECD00740636 /* UIKit.framework */; };
+		E89B34931502CECD00740636 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34741502CECD00740636 /* Foundation.framework */; };
+		E89B349B1502CECD00740636 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E89B34991502CECD00740636 /* InfoPlist.strings */; };
+		E89B349E1502CECD00740636 /* PhotoStudioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E89B349D1502CECD00740636 /* PhotoStudioTests.m */; };
+		E89B34A91502D40E00740636 /* GroupsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E89B34A81502D40E00740636 /* GroupsTableViewController.m */; };
+		E89B34AB1502D73000740636 /* Elements.plist in Resources */ = {isa = PBXBuildFile; fileRef = E89B34AA1502D73000740636 /* Elements.plist */; };
+		E89B34AE1502DA7B00740636 /* ElementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E89B34AD1502DA7B00740636 /* ElementsTableViewController.m */; };
+		E89B34B11502DC3900740636 /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = E89B34B01502DC3900740636 /* Element.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E89B34941502CECD00740636 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E89B34651502CECD00740636 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E89B346D1502CECD00740636;
+			remoteInfo = PhotoStudio;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E89B346E1502CECD00740636 /* PhotoStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E89B34721502CECD00740636 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E89B34741502CECD00740636 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E89B34761502CECD00740636 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E89B347A1502CECD00740636 /* PhotoStudio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoStudio-Info.plist"; sourceTree = "<group>"; };
+		E89B347C1502CECD00740636 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E89B347E1502CECD00740636 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E89B34801502CECD00740636 /* PhotoStudio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoStudio-Prefix.pch"; sourceTree = "<group>"; };
+		E89B34811502CECD00740636 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E89B34821502CECD00740636 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E89B34851502CECD00740636 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		E89B34871502CECD00740636 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		E89B34881502CECD00740636 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E89B348F1502CECD00740636 /* PhotoStudioTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoStudioTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E89B34901502CECD00740636 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		E89B34981502CECD00740636 /* PhotoStudioTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoStudioTests-Info.plist"; sourceTree = "<group>"; };
+		E89B349A1502CECD00740636 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E89B349C1502CECD00740636 /* PhotoStudioTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoStudioTests.h; sourceTree = "<group>"; };
+		E89B349D1502CECD00740636 /* PhotoStudioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoStudioTests.m; sourceTree = "<group>"; };
+		E89B34A71502D40E00740636 /* GroupsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsTableViewController.h; sourceTree = "<group>"; };
+		E89B34A81502D40E00740636 /* GroupsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsTableViewController.m; sourceTree = "<group>"; };
+		E89B34AA1502D73000740636 /* Elements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Elements.plist; sourceTree = "<group>"; };
+		E89B34AC1502DA7B00740636 /* ElementsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementsTableViewController.h; sourceTree = "<group>"; };
+		E89B34AD1502DA7B00740636 /* ElementsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementsTableViewController.m; sourceTree = "<group>"; };
+		E89B34AF1502DC3900740636 /* Element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Element.h; sourceTree = "<group>"; };
+		E89B34B01502DC3900740636 /* Element.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Element.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E89B346B1502CECD00740636 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E89B34731502CECD00740636 /* UIKit.framework in Frameworks */,
+				E89B34751502CECD00740636 /* Foundation.framework in Frameworks */,
+				E89B34771502CECD00740636 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E89B348B1502CECD00740636 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E89B34911502CECD00740636 /* SenTestingKit.framework in Frameworks */,
+				E89B34921502CECD00740636 /* UIKit.framework in Frameworks */,
+				E89B34931502CECD00740636 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E89B34631502CECD00740636 = {
+			isa = PBXGroup;
+			children = (
+				E89B34781502CECD00740636 /* PhotoStudio */,
+				E89B34961502CECD00740636 /* PhotoStudioTests */,
+				E89B34711502CECD00740636 /* Frameworks */,
+				E89B346F1502CECD00740636 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E89B346F1502CECD00740636 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E89B346E1502CECD00740636 /* PhotoStudio.app */,
+				E89B348F1502CECD00740636 /* PhotoStudioTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E89B34711502CECD00740636 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E89B34721502CECD00740636 /* UIKit.framework */,
+				E89B34741502CECD00740636 /* Foundation.framework */,
+				E89B34761502CECD00740636 /* CoreGraphics.framework */,
+				E89B34901502CECD00740636 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E89B34781502CECD00740636 /* PhotoStudio */ = {
+			isa = PBXGroup;
+			children = (
+				E89B34AA1502D73000740636 /* Elements.plist */,
+				E89B34841502CECD00740636 /* MainStoryboard.storyboard */,
+				E89B34871502CECD00740636 /* ViewController.h */,
+				E89B34881502CECD00740636 /* ViewController.m */,
+				E89B34791502CECD00740636 /* Supporting Files */,
+				E89B34A71502D40E00740636 /* GroupsTableViewController.h */,
+				E89B34A81502D40E00740636 /* GroupsTableViewController.m */,
+				E89B34AC1502DA7B00740636 /* ElementsTableViewController.h */,
+				E89B34AD1502DA7B00740636 /* ElementsTableViewController.m */,
+				E89B34AF1502DC3900740636 /* Element.h */,
+				E89B34B01502DC3900740636 /* Element.m */,
+			);
+			path = PhotoStudio;
+			sourceTree = "<group>";
+		};
+		E89B34791502CECD00740636 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E89B34811502CECD00740636 /* AppDelegate.h */,
+				E89B34821502CECD00740636 /* AppDelegate.m */,
+				E89B347A1502CECD00740636 /* PhotoStudio-Info.plist */,
+				E89B347B1502CECD00740636 /* InfoPlist.strings */,
+				E89B347E1502CECD00740636 /* main.m */,
+				E89B34801502CECD00740636 /* PhotoStudio-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E89B34961502CECD00740636 /* PhotoStudioTests */ = {
+			isa = PBXGroup;
+			children = (
+				E89B349C1502CECD00740636 /* PhotoStudioTests.h */,
+				E89B349D1502CECD00740636 /* PhotoStudioTests.m */,
+				E89B34971502CECD00740636 /* Supporting Files */,
+			);
+			path = PhotoStudioTests;
+			sourceTree = "<group>";
+		};
+		E89B34971502CECD00740636 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E89B34981502CECD00740636 /* PhotoStudioTests-Info.plist */,
+				E89B34991502CECD00740636 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E89B346D1502CECD00740636 /* PhotoStudio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E89B34A11502CECD00740636 /* Build configuration list for PBXNativeTarget "PhotoStudio" */;
+			buildPhases = (
+				E89B346A1502CECD00740636 /* Sources */,
+				E89B346B1502CECD00740636 /* Frameworks */,
+				E89B346C1502CECD00740636 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PhotoStudio;
+			productName = PhotoStudio;
+			productReference = E89B346E1502CECD00740636 /* PhotoStudio.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E89B348E1502CECD00740636 /* PhotoStudioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E89B34A41502CECD00740636 /* Build configuration list for PBXNativeTarget "PhotoStudioTests" */;
+			buildPhases = (
+				E89B348A1502CECD00740636 /* Sources */,
+				E89B348B1502CECD00740636 /* Frameworks */,
+				E89B348C1502CECD00740636 /* Resources */,
+				E89B348D1502CECD00740636 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E89B34951502CECD00740636 /* PBXTargetDependency */,
+			);
+			name = PhotoStudioTests;
+			productName = PhotoStudioTests;
+			productReference = E89B348F1502CECD00740636 /* PhotoStudioTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E89B34651502CECD00740636 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "LECB 2";
+			};
+			buildConfigurationList = E89B34681502CECD00740636 /* Build configuration list for PBXProject "PhotoStudio" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E89B34631502CECD00740636;
+			productRefGroup = E89B346F1502CECD00740636 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E89B346D1502CECD00740636 /* PhotoStudio */,
+				E89B348E1502CECD00740636 /* PhotoStudioTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E89B346C1502CECD00740636 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E89B347D1502CECD00740636 /* InfoPlist.strings in Resources */,
+				E89B34861502CECD00740636 /* MainStoryboard.storyboard in Resources */,
+				E89B34AB1502D73000740636 /* Elements.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E89B348C1502CECD00740636 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E89B349B1502CECD00740636 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E89B348D1502CECD00740636 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E89B346A1502CECD00740636 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E89B347F1502CECD00740636 /* main.m in Sources */,
+				E89B34831502CECD00740636 /* AppDelegate.m in Sources */,
+				E89B34891502CECD00740636 /* ViewController.m in Sources */,
+				E89B34A91502D40E00740636 /* GroupsTableViewController.m in Sources */,
+				E89B34AE1502DA7B00740636 /* ElementsTableViewController.m in Sources */,
+				E89B34B11502DC3900740636 /* Element.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E89B348A1502CECD00740636 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E89B349E1502CECD00740636 /* PhotoStudioTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E89B34951502CECD00740636 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E89B346D1502CECD00740636 /* PhotoStudio */;
+			targetProxy = E89B34941502CECD00740636 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E89B347B1502CECD00740636 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E89B347C1502CECD00740636 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E89B34841502CECD00740636 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E89B34851502CECD00740636 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		E89B34991502CECD00740636 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E89B349A1502CECD00740636 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E89B349F1502CECD00740636 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		E89B34A01502CECD00740636 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E89B34A21502CECD00740636 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PhotoStudio/PhotoStudio-Prefix.pch";
+				INFOPLIST_FILE = "PhotoStudio/PhotoStudio-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E89B34A31502CECD00740636 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PhotoStudio/PhotoStudio-Prefix.pch";
+				INFOPLIST_FILE = "PhotoStudio/PhotoStudio-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		E89B34A51502CECD00740636 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PhotoStudio.app/PhotoStudio";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PhotoStudio/PhotoStudio-Prefix.pch";
+				INFOPLIST_FILE = "PhotoStudioTests/PhotoStudioTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		E89B34A61502CECD00740636 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PhotoStudio.app/PhotoStudio";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PhotoStudio/PhotoStudio-Prefix.pch";
+				INFOPLIST_FILE = "PhotoStudioTests/PhotoStudioTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E89B34681502CECD00740636 /* Build configuration list for PBXProject "PhotoStudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E89B349F1502CECD00740636 /* Debug */,
+				E89B34A01502CECD00740636 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E89B34A11502CECD00740636 /* Build configuration list for PBXNativeTarget "PhotoStudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E89B34A21502CECD00740636 /* Debug */,
+				E89B34A31502CECD00740636 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E89B34A41502CECD00740636 /* Build configuration list for PBXNativeTarget "PhotoStudioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E89B34A51502CECD00740636 /* Debug */,
+				E89B34A61502CECD00740636 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E89B34651502CECD00740636 /* Project object */;
+}

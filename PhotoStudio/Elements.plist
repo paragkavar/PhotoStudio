@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Custom</string>
+		<string>Custom Element 1</string>
+		<string>Custom Element 2</string>
+	</array>
+	<array>
+		<string>Cameras</string>
+		<string>Nikon 1</string>
+		<string>Old Camera</string>
+	</array>
+</array>
+</plist>
