@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E8100A08150523E00017697E /* Cameras.Nikon.front.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A05150523E00017697E /* Cameras.Nikon.front.png */; };
+		E8100A09150523E00017697E /* Cameras.Nikon.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A06150523E00017697E /* Cameras.Nikon.top.png */; };
+		E8100A0A150523E00017697E /* Cameras.Old Camera.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A07150523E00017697E /* Cameras.Old Camera.top.png */; };
+		E8100A0F150524B00017697E /* Custom.MacBookAir.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A0D150524B00017697E /* Custom.MacBookAir.top.png */; };
+		E8100A10150524B00017697E /* Custom.MacBook.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A0E150524B00017697E /* Custom.MacBook.top.png */; };
+		E8100A13150529410017697E /* ElementSTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E8100A12150529410017697E /* ElementSTVC.m */; };
 		E89B34731502CECD00740636 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34721502CECD00740636 /* UIKit.framework */; };
 		E89B34751502CECD00740636 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34741502CECD00740636 /* Foundation.framework */; };
 		E89B34771502CECD00740636 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34761502CECD00740636 /* CoreGraphics.framework */; };
@@ -37,6 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E8100A05150523E00017697E /* Cameras.Nikon.front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cameras.Nikon.front.png; sourceTree = "<group>"; };
+		E8100A06150523E00017697E /* Cameras.Nikon.top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cameras.Nikon.top.png; sourceTree = "<group>"; };
+		E8100A07150523E00017697E /* Cameras.Old Camera.top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cameras.Old Camera.top.png"; sourceTree = "<group>"; };
+		E8100A0D150524B00017697E /* Custom.MacBookAir.top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Custom.MacBookAir.top.png; sourceTree = "<group>"; };
+		E8100A0E150524B00017697E /* Custom.MacBook.top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Custom.MacBook.top.png; sourceTree = "<group>"; };
+		E8100A11150529400017697E /* ElementSTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementSTVC.h; sourceTree = "<group>"; };
+		E8100A12150529410017697E /* ElementSTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementSTVC.m; sourceTree = "<group>"; };
 		E89B346E1502CECD00740636 /* PhotoStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89B34721502CECD00740636 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E89B34741502CECD00740636 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -89,6 +102,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E8100A0C150523EA0017697E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E8100A0D150524B00017697E /* Custom.MacBookAir.top.png */,
+				E8100A0E150524B00017697E /* Custom.MacBook.top.png */,
+				E8100A05150523E00017697E /* Cameras.Nikon.front.png */,
+				E8100A06150523E00017697E /* Cameras.Nikon.top.png */,
+				E8100A07150523E00017697E /* Cameras.Old Camera.top.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		E89B34631502CECD00740636 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +147,7 @@
 		E89B34781502CECD00740636 /* PhotoStudio */ = {
 			isa = PBXGroup;
 			children = (
+				E8100A0C150523EA0017697E /* Resources */,
 				E89B34AA1502D73000740636 /* Elements.plist */,
 				E89B34841502CECD00740636 /* MainStoryboard.storyboard */,
 				E89B34871502CECD00740636 /* ViewController.h */,
@@ -133,6 +159,8 @@
 				E89B34AD1502DA7B00740636 /* ElementsTableViewController.m */,
 				E89B34AF1502DC3900740636 /* Element.h */,
 				E89B34B01502DC3900740636 /* Element.m */,
+				E8100A11150529400017697E /* ElementSTVC.h */,
+				E8100A12150529410017697E /* ElementSTVC.m */,
 			);
 			path = PhotoStudio;
 			sourceTree = "<group>";
@@ -243,6 +271,11 @@
 				E89B347D1502CECD00740636 /* InfoPlist.strings in Resources */,
 				E89B34861502CECD00740636 /* MainStoryboard.storyboard in Resources */,
 				E89B34AB1502D73000740636 /* Elements.plist in Resources */,
+				E8100A08150523E00017697E /* Cameras.Nikon.front.png in Resources */,
+				E8100A09150523E00017697E /* Cameras.Nikon.top.png in Resources */,
+				E8100A0A150523E00017697E /* Cameras.Old Camera.top.png in Resources */,
+				E8100A0F150524B00017697E /* Custom.MacBookAir.top.png in Resources */,
+				E8100A10150524B00017697E /* Custom.MacBook.top.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +316,7 @@
 				E89B34A91502D40E00740636 /* GroupsTableViewController.m in Sources */,
 				E89B34AE1502DA7B00740636 /* ElementsTableViewController.m in Sources */,
 				E89B34B11502DC3900740636 /* Element.m in Sources */,
+				E8100A13150529410017697E /* ElementSTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +488,7 @@
 				E89B34A31502CECD00740636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E89B34A41502CECD00740636 /* Build configuration list for PBXNativeTarget "PhotoStudioTests" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +497,7 @@
 				E89B34A61502CECD00740636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

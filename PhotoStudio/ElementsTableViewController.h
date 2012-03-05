@@ -9,18 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Element.h"
 
-@class ElementsTableViewController;
 
-@protocol ElementsTableViewControllerDelegateProtocol
-
--(void)elementDidSelect:(Element*)element;
-
-@end
 
 @interface ElementsTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSString* group;
 @property (nonatomic, strong) NSArray* elements;
-@property (nonatomic, weak) id <ElementsTableViewControllerDelegateProtocol> delegate;
+@property (nonatomic, weak) id mainViewController;
 
 @end

@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GroupsTableViewController.h"
-#import "ElementsTableViewController.h"
+#import "ElementSTVC.h"
 
-@interface ViewController : UIViewController <ElementsTableViewControllerDelegateProtocol>
+@interface ViewController : UIViewController <ElementSTVCDelegate>
 
 @end

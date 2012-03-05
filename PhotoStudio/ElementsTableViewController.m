@@ -7,14 +7,54 @@
 //
 
 #import "ElementsTableViewController.h"
+#import "ElementSTVC.h"
 
+@interface ElementsTableViewController()
+
+@property (nonatomic, strong) NSArray *thumbnails;
+
+-(NSArray*)loadImageElementsAndMakeThumbnails;
+
+@end
 
 @implementation ElementsTableViewController
 
 @synthesize group=_group;
 @synthesize elements=_elements;
-@synthesize delegate=_delegate;
+@synthesize mainViewController=_mainViewController;
 
+@synthesize thumbnails=_thumbnails;
+
+
+#pragma mark - Private methods -
+
+-(NSArray*)loadImageElementsAndMakeThumbnails
+{
+    NSMutableArray* thumbnailsArray=[NSMutableArray arrayWithCapacity:1];
+    
+    //Get the file name: "groupName.elementName.png"
+    for (NSString* elementName in self.elements) {
+        UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"%@.%@.top.png",self.group,elementName]];
+        NSString *assertMessage=[NSString stringWithFormat:@"\n**********\nThere is a problem loading image %@.%@\n**********",self.group,elementName];
+        NSAssert(image, assertMessage , nil);
+        [thumbnailsArray addObject:image];
+    }
+    
+    //Convert to right size (crop)
+#warning TO DO
+    
+    return [NSArray arrayWithArray:thumbnailsArray];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Element"]) 
+    {
+        ElementSTVC *elementsSTVC=(ElementSTVC *)segue.destinationViewController;
+        elementsSTVC.groupAndName=[NSString stringWithFormat:@"%@.%@",self.group,(NSString *)[self.elements objectAtIndex:self.tableView.indexPathForSelectedRow.row]];
+        elementsSTVC.delegate=self.mainViewController;
+    }
+}
 
 
 #pragma mark - View lifecycle
@@ -22,8 +62,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     
+    //Load group elements images
+    self.thumbnails=[self loadImageElementsAndMakeThumbnails];
 }
 
 - (void)viewDidUnload
@@ -31,7 +72,7 @@
     [super viewDidUnload];
     _group=nil;
     _elements=nil;
-    _delegate=nil;
+    _mainViewController=nil;
 }
 
 
@@ -41,44 +82,31 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [self.elements count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Element";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
     
-    // Configure the cell...
+    NSString* groupName=(NSString*)[self.elements objectAtIndex:indexPath.row];
+    cell.textLabel.text=groupName;
+    
+    UIImage* elementThumbnail=(UIImage*)[self.thumbnails objectAtIndex:indexPath.row];
+    cell.imageView.image=elementThumbnail;
+    
+    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
 
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (UIInterfaceOrientationIsLandscape(interfaceOrientation));
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 @end

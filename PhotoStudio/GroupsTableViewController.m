@@ -29,9 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.contentSizeForViewInPopover=CGSizeMake(300, 500);
-    
+        
     //Load groups from Elements.plist
     NSString* path=[[NSBundle mainBundle] pathForResource:@"Elements" ofType:@"plist"];
     NSArray* allGroups=[NSArray arrayWithContentsOfFile:path];
@@ -44,14 +42,18 @@
     
     //Assign to self.groups
     self.groups=[NSArray arrayWithArray:groupsName];    
+    
+    self.navigationItem.title=@"Groups";
 }
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {    
-    if ([segue.identifier isEqualToString:@"Group"]) {
+    if ([segue.identifier isEqualToString:@"Group"]) 
+    {
+        //Data to pass: mainViewController (delegate), group (NSString), elements (NSArray)
         ElementsTableViewController *destinationViewController=(ElementsTableViewController *)segue.destinationViewController;
-        destinationViewController.delegate=self.mainViewController;
+        destinationViewController.mainViewController=self.mainViewController;
         destinationViewController.group=[self.groups objectAtIndex:self.tableView.indexPathForSelectedRow.row];
         destinationViewController.navigationItem.title=destinationViewController.group;
         
@@ -97,13 +99,6 @@
 }
 
 
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-}
-
 - (void)viewDidUnload
 {
     _mainViewController=nil;
@@ -113,15 +108,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (UIInterfaceOrientationIsLandscape(interfaceOrientation));
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 
