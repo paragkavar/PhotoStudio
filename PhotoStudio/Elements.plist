@@ -12,5 +12,11 @@
 		<string>Nikon</string>
 		<string>Old Camera</string>
 	</array>
+	<array>
+		<string>Cars</string>
+		<string>Porsche</string>
+		<string>Ferrari</string>
+		<string>BMW</string>
+	</array>
 </array>
 </plist>
