@@ -9,42 +9,42 @@
 #import "ViewController.h"
 
 
-@interface ViewController() 
+@interface ViewController() <UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, strong) Project *currentProject;
-
 @property (strong, nonatomic) IBOutlet UIView *topView;
 @property (strong, nonatomic) IBOutlet UIView *frontView;
-
 @property (strong,nonatomic) NSMutableArray *topViewElements;
 @property (strong,nonatomic) NSMutableArray *frontViewElements;
-
 @property (weak,nonatomic) ElementView *activeElementInTopView;
 @property (weak,nonatomic) ElementView *activeElementInFrontView;
-
 @property (weak, nonatomic) IBOutlet UILabel *titleInView;
 
 
 - (void)setupElement:(Element *)element;
+- (void)handlePanInTopView:(UIPanGestureRecognizer *)gesture;
+- (void)handlePanInFrontView:(UIPanGestureRecognizer *)gesture;
 
 @end
+
+
+
 
 @implementation ViewController
 
 @synthesize popover=_popover;
 @synthesize currentProject=_currentProject;
 @synthesize titleInView=_titleInView;
-
 @synthesize topView=_topView;
 @synthesize frontView=_frontView;
-
 @synthesize topViewElements=_topViewElements;
 @synthesize frontViewElements=_frontViewElements;
-
 @synthesize activeElementInTopView=_activeElementInTopView;
 @synthesize activeElementInFrontView=_activeElementInFrontView;
 
+
+#pragma mark - IBAction methods -
 
 - (IBAction)saveProjectButtonDidTap
 {
@@ -78,25 +78,17 @@
     
 }
 
-
-
-
-- (void)viewDidLoad
+- (IBAction)trashDidTap
 {
-    //Create a void current project
-    self.currentProject=[[Project alloc] init];
-    self.currentProject.UPID=@"Test Project";
-    
-    //Set title
-    //self.titleInView.text=self.currentProject.UPID;
-    
-    //Init arrays
-    self.topViewElements=[NSMutableArray arrayWithCapacity:1];
-    self.frontViewElements=[NSMutableArray arrayWithCapacity:1];
-    
-    //Init project elements array
-    self.currentProject.elements=[NSMutableArray arrayWithCapacity:1];
+    if (self.activeElementInTopView || self.activeElementInFrontView) {
+        //Show alert view with delete confirmation
+        UIAlertView *trashAlertView=[[UIAlertView alloc] initWithTitle:@"ATENTION" message:@"The selected element will be deleted" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+        [trashAlertView show];
+    }
 }
+
+
+#pragma mark - Segue methods -
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -113,6 +105,36 @@
         groupsTableViewController.mainViewController=self;
     }
 }
+
+#pragma mark - Private Methods -
+
+- (void)setupElement:(Element *)element
+{
+    //Set the element properties that couldn't be set in the ElementSTVC
+    element.topView.delegate=self;
+    element.frontView.delegate=self;
+    
+    //Add element views to top and front arrays
+    [self.topViewElements addObject:element.topView];
+    [self.frontViewElements addObject:element.frontView];
+    
+    //Add element to top and front views
+    [self.topView addSubview:element.topView];
+    [self.frontView addSubview:element.frontView];
+    
+    //Add gesture recognizer to each view for dragging the view
+    [element.topView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanInTopView:)]];
+    [element.frontView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanInFrontView:)]];
+    
+    //Add rotation gesture recognizer to each view (but handled in the ElementView)
+    [self.topView addGestureRecognizer:[[UIRotationGestureRecognizer alloc] initWithTarget:element.topView action:@selector(handleRotation:)]];
+    [self.frontView addGestureRecognizer:[[UIRotationGestureRecognizer alloc] initWithTarget:element.frontView action:@selector(handleRotation:)]]; 
+    
+    //Add pinch gesture recognizer (but handled in the ElementView)
+    [self.topView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:element.topView action:@selector(handlePinch:)]];
+    [self.frontView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:element.frontView action:@selector(handlePinch:)]]; 
+}
+
 
 #pragma mark - ElementViewDelegate methods -
 
@@ -242,34 +264,53 @@
     [self setupElement:element];
 }
 
-- (void)setupElement:(Element *)element
+
+#pragma mark - UIAlertViewDelegate methods -
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //Set the element properties that couldn't be set in the ElementSTVC
-    element.topView.delegate=self;
-    element.frontView.delegate=self;
-    
-    //Add element views to top and front arrays
-    [self.topViewElements addObject:element.topView];
-    [self.frontViewElements addObject:element.frontView];
-    
-    //Add element to top and front views
-    [self.topView addSubview:element.topView];
-    [self.frontView addSubview:element.frontView];
-    
-    //Add gesture recognizer to each view for dragging the view
-    [element.topView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanInTopView:)]];
-    [element.frontView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanInFrontView:)]];
-    
-    //Add rotation gesture recognizer to each view (but handled in the ElementView)
-    [self.topView addGestureRecognizer:[[UIRotationGestureRecognizer alloc] initWithTarget:element.topView action:@selector(handleRotation:)]];
-    [self.frontView addGestureRecognizer:[[UIRotationGestureRecognizer alloc] initWithTarget:element.frontView action:@selector(handleRotation:)]]; 
-    
-    //Add pinch gesture recognizer (but handled in the ElementView)
-    [self.topView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:element.topView action:@selector(handlePinch:)]];
-    [self.frontView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:element.frontView action:@selector(handlePinch:)]]; 
+    if (buttonIndex==0) {
+        //Delete selected element from views
+        [self.activeElementInTopView removeFromSuperview];
+        [self.activeElementInFrontView removeFromSuperview];
+        
+        //Delete selected element from arrays
+        [self.topViewElements removeObject:self.activeElementInTopView];
+        [self.frontViewElements removeObject:self.activeElementInFrontView];
+        
+        //Delete Element from project
+        //In order to do that, we have to get first the element that holds the active topView
+        for (Element *element in self.currentProject.elements) {
+            if (element.topView==self.activeElementInTopView) {
+                [self.currentProject.elements removeObject:element];
+                break;
+            }
+        }
+        
+        //Set actice elements to nil
+        self.activeElementInTopView=nil;
+        self.activeElementInFrontView=nil;
+    }
 }
 
+#pragma mark - View life cycle methods -
 
+- (void)viewDidLoad
+{
+    //Create a void current project
+    self.currentProject=[[Project alloc] init];
+    self.currentProject.UPID=@"Test Project";
+    
+    //Set title
+    //self.titleInView.text=self.currentProject.UPID;
+    
+    //Init arrays
+    self.topViewElements=[NSMutableArray arrayWithCapacity:1];
+    self.frontViewElements=[NSMutableArray arrayWithCapacity:1];
+    
+    //Init project elements array
+    self.currentProject.elements=[NSMutableArray arrayWithCapacity:1];
+}
 - (void)viewDidUnload
 {
     [self setTitleInView:nil];

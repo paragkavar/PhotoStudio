@@ -15,6 +15,7 @@
 		E8100A0F150524B00017697E /* Custom.MacBookAir.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A0D150524B00017697E /* Custom.MacBookAir.top.png */; };
 		E8100A10150524B00017697E /* Custom.MacBook.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A0E150524B00017697E /* Custom.MacBook.top.png */; };
 		E8100A13150529410017697E /* ElementSTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E8100A12150529410017697E /* ElementSTVC.m */; };
+		E812402F150689CE00C08614 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = E812402E150689CE00C08614 /* trash.png */; };
 		E89B34731502CECD00740636 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34721502CECD00740636 /* UIKit.framework */; };
 		E89B34751502CECD00740636 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34741502CECD00740636 /* Foundation.framework */; };
 		E89B34771502CECD00740636 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34761502CECD00740636 /* CoreGraphics.framework */; };
@@ -62,6 +63,7 @@
 		E8100A0E150524B00017697E /* Custom.MacBook.top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Custom.MacBook.top.png; sourceTree = "<group>"; };
 		E8100A11150529400017697E /* ElementSTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementSTVC.h; sourceTree = "<group>"; };
 		E8100A12150529410017697E /* ElementSTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementSTVC.m; sourceTree = "<group>"; };
+		E812402E150689CE00C08614 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		E89B346E1502CECD00740636 /* PhotoStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89B34721502CECD00740636 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E89B34741502CECD00740636 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -123,6 +125,7 @@
 		E8100A0C150523EA0017697E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E812402E150689CE00C08614 /* trash.png */,
 				E8DF5D6E15057EB50063D162 /* Cars.BMW.front.png */,
 				E8DF5D6F15057EB50063D162 /* Cars.BMW.top.png */,
 				E8DF5D7015057EB50063D162 /* Cars.Porsche.front.png */,
@@ -326,6 +329,7 @@
 				E8DF5D7715057EB50063D162 /* Cars.Porsche.top.png in Resources */,
 				E8DF5D7815057EB50063D162 /* Cars.Ferrari.top.png in Resources */,
 				E8DF5D7915057EB50063D162 /* Cars.Ferrari.front.png in Resources */,
+				E812402F150689CE00C08614 /* trash.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

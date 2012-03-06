@@ -119,4 +119,51 @@
     }
 }
 
+#pragma mark - NSCoding methods -
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self=[[ElementView alloc] initWithFrame:CGRectMake(0, 0, 100, 100) andImage:nil]) //This is the key element: to allocate the ElementView object. It means that we do not actually archive/unarchive the ElementView object, we do that only with the center position and the transform properties.
+    {
+        //Get the imageView
+        self.imageView=[aDecoder decodeObjectForKey:@"Element.imageView"];
+        
+        //Add the imageView to the topView
+        [self addSubview:self.imageView];
+        
+        //Get the center position
+        CGFloat x=[aDecoder decodeFloatForKey:@"Element.center.x"];
+        CGFloat y=[aDecoder decodeFloatForKey:@"Element.center.y"];
+        
+        self.center=CGPointMake(x, y);
+        
+        //Get the transform values
+        CGFloat a=[aDecoder decodeFloatForKey:@"Element.transform.a"];
+        CGFloat b=[aDecoder decodeFloatForKey:@"Element.transform.b"];
+        CGFloat c=[aDecoder decodeFloatForKey:@"Element.transform.c"];
+        CGFloat d=[aDecoder decodeFloatForKey:@"Element.transform.d"];
+        CGFloat tx=[aDecoder decodeFloatForKey:@"Element.transform.tx"];
+        CGFloat ty=[aDecoder decodeFloatForKey:@"Element.transform.ty"];
+        
+        self.transform=CGAffineTransformMake(a, b, c, d, tx, ty);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.imageView forKey:@"Element.imageView"];
+    
+    [aCoder encodeFloat:self.center.x forKey:@"Element.center.x"];
+    [aCoder encodeFloat:self.center.y forKey:@"Element.center.y"];
+    
+    [aCoder encodeFloat:self.transform.a forKey:@"Element.transform.a"];
+    [aCoder encodeFloat:self.transform.b forKey:@"Element.transform.b"];
+    [aCoder encodeFloat:self.transform.c forKey:@"Element.transform.c"];
+    [aCoder encodeFloat:self.transform.d forKey:@"Element.transform.d"];
+    [aCoder encodeFloat:self.transform.tx forKey:@"Element.transform.tx"];
+    [aCoder encodeFloat:self.transform.ty forKey:@"Element.transform.ty"];
+}
+
+
 @end
