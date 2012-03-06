@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		346C56B1150601000068DC32 /* ElementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 346C56B0150601000068DC32 /* ElementView.m */; };
+		346C56B9150612970068DC32 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 346C56B8150612970068DC32 /* Project.m */; };
 		E8100A08150523E00017697E /* Cameras.Nikon.front.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A05150523E00017697E /* Cameras.Nikon.front.png */; };
 		E8100A09150523E00017697E /* Cameras.Nikon.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A06150523E00017697E /* Cameras.Nikon.top.png */; };
 		E8100A0A150523E00017697E /* Cameras.Old Camera.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A07150523E00017697E /* Cameras.Old Camera.top.png */; };
@@ -49,6 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		346C56AF150601000068DC32 /* ElementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementView.h; sourceTree = "<group>"; };
+		346C56B0150601000068DC32 /* ElementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementView.m; sourceTree = "<group>"; };
+		346C56B7150612970068DC32 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		346C56B8150612970068DC32 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		E8100A05150523E00017697E /* Cameras.Nikon.front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cameras.Nikon.front.png; sourceTree = "<group>"; };
 		E8100A06150523E00017697E /* Cameras.Nikon.top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cameras.Nikon.top.png; sourceTree = "<group>"; };
 		E8100A07150523E00017697E /* Cameras.Old Camera.top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cameras.Old Camera.top.png"; sourceTree = "<group>"; };
@@ -211,6 +217,10 @@
 				E89B34AA1502D73000740636 /* Elements.plist */,
 				E89B34AF1502DC3900740636 /* Element.h */,
 				E89B34B01502DC3900740636 /* Element.m */,
+				346C56AF150601000068DC32 /* ElementView.h */,
+				346C56B0150601000068DC32 /* ElementView.m */,
+				346C56B7150612970068DC32 /* Project.h */,
+				346C56B8150612970068DC32 /* Project.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -357,6 +367,8 @@
 				E89B34AE1502DA7B00740636 /* ElementsTableViewController.m in Sources */,
 				E89B34B11502DC3900740636 /* Element.m in Sources */,
 				E8100A13150529410017697E /* ElementSTVC.m in Sources */,
+				346C56B1150601000068DC32 /* ElementView.m in Sources */,
+				346C56B9150612970068DC32 /* Project.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

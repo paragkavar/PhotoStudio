@@ -10,4 +10,27 @@
 
 @implementation Element
 
+@synthesize topView=_topView;
+@synthesize frontView=_frontView;
+@synthesize fileName=_fileName;
+
+#pragma  mark - NSCoding Methods -
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self=[super init]) {
+        self.topView=[aDecoder decodeObjectForKey:@"Element.topView"];
+        self.frontView=[aDecoder decodeObjectForKey:@"Element.frontView"];
+        self.fileName=[aDecoder decodeObjectForKey:@"Element.fileName"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.topView forKey:@"Element.topView"];
+    [aCoder encodeObject:self.frontView forKey:@"Element.frontView"];
+    [aCoder encodeObject:self.fileName forKey:@"Element.fileName"];
+}
+
 @end

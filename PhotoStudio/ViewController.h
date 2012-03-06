@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GroupsTableViewController.h"
 #import "ElementSTVC.h"
+#import "Project.h"
 
-@interface ViewController : UIViewController <ElementSTVCDelegate>
+@interface ViewController : UIViewController <ElementSTVCDelegate,ElementViewDelegate>
 
 @end

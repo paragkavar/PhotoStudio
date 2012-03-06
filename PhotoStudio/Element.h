@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ElementView.h"
 
-@interface Element : NSObject
+@interface Element : NSObject <NSCoding>
+
+@property (nonatomic, strong) ElementView *topView;
+@property (nonatomic, strong) ElementView *frontView;
+
+@property (nonatomic, strong) NSString *fileName;
 
 @end
