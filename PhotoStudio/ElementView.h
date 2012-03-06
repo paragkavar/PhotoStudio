@@ -16,7 +16,7 @@
 @end
 
 
-@interface ElementView : UIView <NSCoding>
+@interface ElementView:UIView 
 
 @property (nonatomic,weak) id <ElementViewDelegate> delegate;
 @property (nonatomic, readwrite) BOOL active;

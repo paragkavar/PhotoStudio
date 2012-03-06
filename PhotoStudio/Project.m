@@ -57,7 +57,7 @@
 {
     if (self=[super init]) {
         self.UPID=[aDecoder decodeObjectForKey:@"Project.UPID"];
-        self.elements=[aDecoder decodeObjectForKey:@"Project.elements"];
+        self.elements=[aDecoder decodeObjectForKey:@"Project.elements"]; //It will be a non-mutable array when created from NSCoding
         //self.elementsNames=[aDecoder decodeObjectForKey:@"Project.elementsNames"];
     }
     return self;

@@ -56,14 +56,6 @@
         
         //Add tap gesture recognizer for activing and deactiving the view
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
-        
-        /*
-        //Add rotation gesture recognizer
-        [view addGestureRecognizer:[[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)]];
-        
-        //Add pinch gesture recognizer
-        [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)]]; 
-         */
     }
     return self;
 }
@@ -126,34 +118,5 @@
         CGContextStrokePath(context);
     }
 }
-
-#pragma mark NSCoding methods -
-
-- (id)initWithCoder:(NSCoder *)aDecoder //Remember thet the delegate is not encoded
-{
-    if (self=[super init]) { //Maybe init only?
-        self.active=[aDecoder decodeBoolForKey:@"ElementView.active"];
-        self.imageView=[aDecoder decodeObjectForKey:@"ElementView.imageView"];
-        
-        //VERY IMPORTANT TO DO THAT
-        [self addSubview:self.imageView];
-        
-        self.imageView.frame=CGRectMake(0, 0, 100, 100); 
-        self.imageView.contentMode=UIViewContentModeScaleAspectFit;
-        
-        //Add tap gesture recognizer for activing and deactiving the view
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [aCoder encodeBool:self.active forKey:@"ElementView.active"];
-    [aCoder encodeObject:self.imageView forKey:@"ElementView.imageView"];
-}
-
-
-
 
 @end

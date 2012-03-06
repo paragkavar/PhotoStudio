@@ -83,7 +83,7 @@
 
 - (void)viewDidLoad
 {
-    //Create current project
+    //Create a void current project
     self.currentProject=[[Project alloc] init];
     self.currentProject.UPID=@"Test Project";
     
@@ -236,35 +236,10 @@
     //Dismiss popover
     [self.popover dismissPopoverAnimated:YES];
     
-    //Set the element properties that couldn't be set in the ElementSTVC
-    element.topView.delegate=self;
-    element.frontView.delegate=self;
-    
     //Add element to elements array
     [self.currentProject.elements addObject:element];
     
-    //Add element views to top and front arrays
-    [self.topViewElements addObject:element.topView];
-    [self.frontViewElements addObject:element.frontView];
-    
-    //Add element to top and front views
-    [self.topView addSubview:element.topView];
-    [self.frontView addSubview:element.frontView];
-    
-    //Add gesture recognizer to each view for dragging the view
-    [element.topView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanInTopView:)]];
-    [element.frontView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanInFrontView:)]];
-    
-    //Add rotation gesture recognizer to each view (but handled in the ElementView)
-    [self.topView addGestureRecognizer:[[UIRotationGestureRecognizer alloc] initWithTarget:element.topView action:@selector(handleRotation:)]];
-    [self.frontView addGestureRecognizer:[[UIRotationGestureRecognizer alloc] initWithTarget:element.frontView action:@selector(handleRotation:)]]; 
-    
-    //Add pinch gesture recognizer (but handled in the ElementView)
-    [self.topView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:element.topView action:@selector(handlePinch:)]];
-    [self.frontView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:element.frontView action:@selector(handlePinch:)]]; 
-    for (UIGestureRecognizer *gesture in element.topView.gestureRecognizers) {
-        NSLog(@"Gesture: %@",gesture);
-    }    
+    [self setupElement:element];
 }
 
 - (void)setupElement:(Element *)element
@@ -281,10 +256,6 @@
     [self.topView addSubview:element.topView];
     [self.frontView addSubview:element.frontView];
     
-    //Add tap gesture recognizer for activing and deactiving the view
-    //[element.topView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:element.topView action:@selector(handleTap:)]];
-    
-    
     //Add gesture recognizer to each view for dragging the view
     [element.topView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanInTopView:)]];
     [element.frontView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanInFrontView:)]];
@@ -296,10 +267,6 @@
     //Add pinch gesture recognizer (but handled in the ElementView)
     [self.topView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:element.topView action:@selector(handlePinch:)]];
     [self.frontView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:element.frontView action:@selector(handlePinch:)]]; 
-    
-    for (UIGestureRecognizer *gesture in element.topView.gestureRecognizers) {
-        NSLog(@"Gesture: %@",gesture);
-    }
 }
 
 
