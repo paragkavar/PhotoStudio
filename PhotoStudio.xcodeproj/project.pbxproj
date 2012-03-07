@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		346C56B1150601000068DC32 /* ElementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 346C56B0150601000068DC32 /* ElementView.m */; };
 		346C56B9150612970068DC32 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 346C56B8150612970068DC32 /* Project.m */; };
+		34B96A7F15075575002D6A1A /* ProjetcsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B96A7E15075575002D6A1A /* ProjetcsTableViewController.m */; };
+		34B96A8315075F1A002D6A1A /* ProjectSTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B96A8215075F1A002D6A1A /* ProjectSTVC.m */; };
 		E8100A08150523E00017697E /* Cameras.Nikon.front.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A05150523E00017697E /* Cameras.Nikon.front.png */; };
 		E8100A09150523E00017697E /* Cameras.Nikon.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A06150523E00017697E /* Cameras.Nikon.top.png */; };
 		E8100A0A150523E00017697E /* Cameras.Old Camera.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8100A07150523E00017697E /* Cameras.Old Camera.top.png */; };
@@ -56,6 +58,10 @@
 		346C56B0150601000068DC32 /* ElementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementView.m; sourceTree = "<group>"; };
 		346C56B7150612970068DC32 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		346C56B8150612970068DC32 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
+		34B96A7D15075575002D6A1A /* ProjetcsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjetcsTableViewController.h; sourceTree = "<group>"; };
+		34B96A7E15075575002D6A1A /* ProjetcsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjetcsTableViewController.m; sourceTree = "<group>"; };
+		34B96A8115075F1A002D6A1A /* ProjectSTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectSTVC.h; sourceTree = "<group>"; };
+		34B96A8215075F1A002D6A1A /* ProjectSTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectSTVC.m; sourceTree = "<group>"; };
 		E8100A05150523E00017697E /* Cameras.Nikon.front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cameras.Nikon.front.png; sourceTree = "<group>"; };
 		E8100A06150523E00017697E /* Cameras.Nikon.top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cameras.Nikon.top.png; sourceTree = "<group>"; };
 		E8100A07150523E00017697E /* Cameras.Old Camera.top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cameras.Old Camera.top.png"; sourceTree = "<group>"; };
@@ -240,6 +246,10 @@
 				E89B34AD1502DA7B00740636 /* ElementsTableViewController.m */,
 				E8100A11150529400017697E /* ElementSTVC.h */,
 				E8100A12150529410017697E /* ElementSTVC.m */,
+				34B96A7D15075575002D6A1A /* ProjetcsTableViewController.h */,
+				34B96A7E15075575002D6A1A /* ProjetcsTableViewController.m */,
+				34B96A8115075F1A002D6A1A /* ProjectSTVC.h */,
+				34B96A8215075F1A002D6A1A /* ProjectSTVC.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -373,6 +383,8 @@
 				E8100A13150529410017697E /* ElementSTVC.m in Sources */,
 				346C56B1150601000068DC32 /* ElementView.m in Sources */,
 				346C56B9150612970068DC32 /* Project.m in Sources */,
+				34B96A7F15075575002D6A1A /* ProjetcsTableViewController.m in Sources */,
+				34B96A8315075F1A002D6A1A /* ProjectSTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

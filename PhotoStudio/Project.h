@@ -12,9 +12,11 @@
 
 @property (nonatomic, strong) NSString *UPID;
 @property (nonatomic, strong) NSMutableArray *elements;
+@property (nonatomic, strong) UIImage *resultPicture;
 //@property (nonatomic, strong) NSArray *elementsNames;
 
 - (void)save;
 + (Project *)loadProjectWithUPID:(NSString *)uPID;
++ (Project *)loadProjectMainInfoWithUPID:(NSString *)uPID;
 
 @end
