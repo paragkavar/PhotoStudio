@@ -13,7 +13,10 @@
 @synthesize UPID=_UPID;
 @synthesize elements=_elements;
 @synthesize resultPicture=_resultPicture;
-//@synthesize elementsNames=_elementsNames;
+@synthesize title=_title;
+@synthesize author=_author;
+@synthesize creationDate=_creationDate;
+@synthesize details=_details;
 
 
 + (Project *)loadProjectWithUPID:(NSString *)uPID
@@ -42,7 +45,7 @@
     //Load full project
     Project *projectMainInfo=[self loadProjectWithUPID:uPID];
     
-    //Maintain only title and resultPicture properties
+    //Set elements list to nil to reduce the memory footprint
     projectMainInfo.elements=nil;
     
     return projectMainInfo;
@@ -72,7 +75,11 @@
         
         NSData* pictureData=[aDecoder decodeObjectForKey:@"Project.resultPicture"];
         self.resultPicture=[UIImage imageWithData:pictureData];
-        //self.elementsNames=[aDecoder decodeObjectForKey:@"Project.elementsNames"];
+        
+        self.title=[aDecoder decodeObjectForKey:@"Project.title"];
+        self.author=[aDecoder decodeObjectForKey:@"Project.author"];
+        self.creationDate=[aDecoder decodeObjectForKey:@"Project.creationDate"];
+        self.details=[aDecoder decodeObjectForKey:@"Project.details"];
     }
     return self;
 }
@@ -83,8 +90,12 @@
     [aCoder encodeObject:self.elements forKey:@"Project.elements"];
     
     NSData* pictureData=UIImageJPEGRepresentation(self.resultPicture, 1);
-    [aCoder encodeObject:pictureData forKey:@"Project.resultPicture"];      
-    //[aCoder encodeObject:self.elementsNames forKey:@"Project.elementsNames"];
+    [aCoder encodeObject:pictureData forKey:@"Project.resultPicture"];
+    
+    [aCoder encodeObject:self.title forKey:@"Project.title"];
+    [aCoder encodeObject:self.author forKey:@"Project.author"];
+    [aCoder encodeObject:self.creationDate forKey:@"Project.creationDate"];
+    [aCoder encodeObject:self.details forKey:@"Project.details"];
 }
 
 @end

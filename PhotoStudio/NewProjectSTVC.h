@@ -1,5 +1,5 @@
 //
-//  ProjectSTVC.h
+//  NewProjectSTVC.h
 //  PhotoStudio
 //
 //  Created by Xavier BENAVENT on 3/7/12.
@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Project.h"
 
-@class ProjectSTVC;
-@protocol ProjectSTVCDelegate
+@class NewProjectSTVC;
+@protocol NewProjectSTVCDelegate
 - (void)projectDidCreate:(Project *)newProject;
 @end
 
 
-@interface ProjectSTVC : UITableViewController
+@interface NewProjectSTVC : UITableViewController
 
-@property (nonatomic, weak) id <ProjectSTVCDelegate> delegate;
+@property (nonatomic, weak) id <NewProjectSTVCDelegate> delegate;
 
 @end

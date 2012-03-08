@@ -13,7 +13,11 @@
 @property (nonatomic, strong) NSString *UPID;
 @property (nonatomic, strong) NSMutableArray *elements;
 @property (nonatomic, strong) UIImage *resultPicture;
-//@property (nonatomic, strong) NSArray *elementsNames;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *author;
+@property (nonatomic, strong) NSString *creationDate;
+@property (nonatomic, strong) NSString *details;
+
 
 - (void)save;
 + (Project *)loadProjectWithUPID:(NSString *)uPID;

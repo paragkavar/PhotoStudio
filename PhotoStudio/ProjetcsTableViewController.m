@@ -7,14 +7,17 @@
 //
 
 #import "ProjetcsTableViewController.h"
-#import "ProjectSTVC.h"
+#import "NewProjectSTVC.h"
+#import "EditProjectSTVC.h"
+#import "ImageHelper.h"
 
 
-@interface ProjetcsTableViewController() <ProjectSTVCDelegate>
+@interface ProjetcsTableViewController() <NewProjectSTVCDelegate,EditProjectSTVCDelegate>
 
 //This array will contain only the picture and the title (project name)
 @property (nonatomic, strong) NSMutableArray *projectsMainInfo;
 @property (nonatomic, strong) NSMutableArray *UPIDs;
+@property (nonatomic, readwrite) int rowEdited;
 
 - (void)loadProjects;
 - (void)saveUPIDs;
@@ -25,6 +28,7 @@
 
 @synthesize projectsMainInfo=_projectsMainInfo;
 @synthesize UPIDs=_UPIDs;
+@synthesize rowEdited=_rowEdited;
 
 #pragma mark - Private methods -
 
@@ -54,16 +58,61 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"New Project"]) {
-        ProjectSTVC *projectSTVC=(ProjectSTVC *)segue.destinationViewController;
-        projectSTVC.delegate=self;
+        NewProjectSTVC *newProjectSTVC=(NewProjectSTVC *)segue.destinationViewController;
+        newProjectSTVC.delegate=self;
+    }
+    
+    if ([segue.identifier isEqualToString:@"Edit Project"]) {
+        EditProjectSTVC *editprojectSTVC=(EditProjectSTVC *)segue.destinationViewController;
+        editprojectSTVC.delegate=self;
+        
+        //Get and store the selected row
+        self.rowEdited=self.tableView.indexPathForSelectedRow.row;
+        
+        //Load the full project, getting the UPID from the project at the selected row
+        editprojectSTVC.editingProject=[Project loadProjectWithUPID:[(Project *)[self.projectsMainInfo objectAtIndex:self.rowEdited] UPID]];
     }
 }
 
-#pragma mark - ProjectSTVCDelegate
+#pragma mark - NewProjectSTVCDelegate
 
 - (void)projectDidCreate:(Project *)newProject
 {
+    //Dismiss NewProjectSTVC
     [self.navigationController popViewControllerAnimated:YES];
+    
+    //Save project
+    [newProject save];
+    
+    //Add project UPID to UPIDs array
+    [self.UPIDs addObject:newProject.UPID];
+    
+    //Save UPIDs
+    [self saveUPIDs];
+    
+    //Add new project to projects array
+    [self.projectsMainInfo addObject:newProject];
+    
+    //Update tabe view
+    [self.tableView reloadData];
+}
+
+#pragma mark - EditProjectSTVCDelegate -
+
+- (void)projectDidFinishEditing:(Project *)project
+{
+    //Dismiss EditProjectSTVC
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    //Save project
+    //The images are saved being croped to 250x150 aprox
+    [project save];
+    
+    //Replace project in projects array
+    [self.projectsMainInfo replaceObjectAtIndex:self.rowEdited withObject:project];
+    
+    //Update table view
+    [self.tableView reloadData];
 }
 
 #pragma mark - View lifecycle
@@ -101,11 +150,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     Project *projectMainInfo=(Project *)[self.projectsMainInfo objectAtIndex:indexPath.row];
-    cell.textLabel.text=projectMainInfo.UPID;
-    cell.imageView.frame=CGRectMake(0, 0, 90, 90);
-    cell.imageView.image=projectMainInfo.resultPicture;
-    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     
+    UILabel *projectTitle=(UILabel *)[cell viewWithTag:101];
+    UILabel *projectUPID=(UILabel *)[cell viewWithTag:102];
+    UIImageView *projectImageView=(UIImageView *)[cell viewWithTag:100];
+    
+    projectTitle.text=projectMainInfo.title;
+    projectUPID.text=projectMainInfo.UPID;
+    
+    
+    //The images are croped by the method to 100x100, but we NEVER save this size. we ONLY save the image when the project is created or edited (250x150)
+    projectImageView.image=[ImageHelper getImageAndReduceImage:projectMainInfo.resultPicture toCropInView:projectImageView];
+        
     return cell;
 }
 

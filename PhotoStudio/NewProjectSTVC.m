@@ -1,14 +1,14 @@
 //
-//  ProjectSTVC.m
+//  NewProjectSTVC.m
 //  PhotoStudio
 //
 //  Created by Xavier BENAVENT on 3/7/12.
 //  Copyright (c) 2012 LECB 2. All rights reserved.
 //
 
-#import "ProjectSTVC.h"
+#import "NewProjectSTVC.h"
 
-@interface ProjectSTVC() <UITextFieldDelegate,UITextViewDelegate>
+@interface NewProjectSTVC() <UITextFieldDelegate,UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *title;
 @property (weak, nonatomic) IBOutlet UITextField *author;
@@ -19,11 +19,10 @@
 
 - (void)textViewButtonDidTap;
 
-
 @end
 
 
-@implementation ProjectSTVC
+@implementation NewProjectSTVC
 
 @synthesize delegate=_delegate;
 @synthesize title;
@@ -50,7 +49,22 @@
 {
     //Create project from fields
     Project *newProject=[[Project alloc] init];
+    newProject.title=self.title.text;
+    newProject.author=self.author.text;
+    newProject.creationDate=self.creationDate.text;
+    newProject.details=self.details.text;
+    newProject.resultPicture=self.imageView.image;
     
+    // Generate random string of 10 that will be the UPID to store this project
+    int randomStringLength=10;
+    NSString *chars = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    NSMutableString *randomString = [NSMutableString stringWithCapacity:randomStringLength];
+    srand(time(NULL));
+    for (int i=0; i<randomStringLength; i++) {
+        [randomString appendFormat:@"%c",[chars characterAtIndex:rand()%[chars length]]];
+    }
+    
+    newProject.UPID=randomString;
     
     //Call delegate
     [self.delegate projectDidCreate:newProject];
@@ -64,7 +78,6 @@
     
     self.title.delegate=self;
     self.author.delegate=self;
-    //self.creationDate.delegate=self;
     self.details.delegate=self;
     
     //Set current date and time
