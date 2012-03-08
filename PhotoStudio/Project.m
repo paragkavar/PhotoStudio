@@ -59,6 +59,17 @@
     return self;
 }
 
+
+- (id)initForDefaultProject
+{
+    if (self=[self initWithTitle:@"Default Project" author:@"Ikokoro Dreams"]) {
+        self.resultPicture=[UIImage imageNamed:@"default image.jpg"];
+        self.details=@"This is the default project created by the app";
+    }
+    return self;
+}
+
+
 + (Project *)loadProjectWithUPID:(NSString *)uPID
 {
     //Create a project

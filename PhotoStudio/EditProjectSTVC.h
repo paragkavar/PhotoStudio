@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Project.h"
 #import "ImageHelper.h"
+#import "Element.h"
 
 @class EditProjectSTVC;
 @protocol EditProjectSTVCDelegate

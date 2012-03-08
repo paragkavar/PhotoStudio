@@ -20,6 +20,7 @@
 
 
 - (id)initWithTitle:(NSString *)title author:(NSString *)author;
+- (id)initForDefaultProject;
 - (void)save;
 + (Project *)loadProjectWithUPID:(NSString *)uPID;
 

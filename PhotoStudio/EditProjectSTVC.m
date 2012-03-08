@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *creationDate;
 @property (weak, nonatomic) IBOutlet UITextView *details;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UITextView *elementsList;
+
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *imageCell;
 
 @property (nonatomic, strong) UIPopoverController *myPopoverController;
@@ -34,6 +37,7 @@
 @synthesize creationDate;
 @synthesize details;
 @synthesize imageView;
+@synthesize elementsList;
 @synthesize imageCell;
 
 @synthesize myPopoverController=_myPopoverController;
@@ -114,12 +118,23 @@
     self.details.text=self.editingProject.details;
     self.imageView.image=self.editingProject.resultPicture;
     
+    //Create elements list to show
+    NSMutableString *list=[NSMutableString stringWithCapacity:1];
+    
+    for (Element *element in self.editingProject.elements) {
+        [list appendString:@"An Element"];
+        [list appendString:@"\n"];
+    }
+    
+    self.elementsList.text=[NSString stringWithString:list];
+    
     //Add tap gesture recognizer to the image view
     [self.imageCell addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap)]];    
 }
 
 - (void)viewDidUnload
 {
+    [self setElementsList:nil];
     [super viewDidUnload];
     _delegate=nil;
     _editingProject=nil;

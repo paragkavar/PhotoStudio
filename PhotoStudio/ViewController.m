@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, strong) Project *currentProject;
-//@property (nonatomic, strong) NSString *currentUPID;
 @property (strong, nonatomic) IBOutlet UIView *topView;
 @property (strong, nonatomic) IBOutlet UIView *frontView;
 @property (strong,nonatomic) NSMutableArray *topViewElements;
@@ -23,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleInView;
 
 
+- (void)setupCurrentProject;
 - (void)setupElement:(Element *)element;
 - (void)handlePanInTopView:(UIPanGestureRecognizer *)gesture;
 - (void)handlePanInFrontView:(UIPanGestureRecognizer *)gesture;
@@ -37,7 +37,6 @@
 
 @synthesize popover=_popover;
 @synthesize currentProject=_currentProject;
-//@synthesize currentUPID=_currentUPID;
 @synthesize titleInView=_titleInView;
 @synthesize topView=_topView;
 @synthesize frontView=_frontView;
@@ -49,40 +48,6 @@
 
 #pragma mark - IBAction methods -
 
-- (IBAction)saveProjectButtonDidTap
-{
-    [self.currentProject save];
-    for (Element *element in self.currentProject.elements) {
-        NSLog(@"Elements when saving project: %@",element);
-    }
-}
-
-- (IBAction)loadProjectButtonDidTap
-{
-    //Load project
-    self.currentProject=[Project loadProjectWithUPID:@"Test Project"];
-    NSLog(@"%d",[self.currentProject.elements count]);
-    
-    self.titleInView.text=self.currentProject.UPID;
-    
-    //Reset arrays
-    [self.topViewElements removeAllObjects];
-    [self.frontViewElements removeAllObjects];
-    
-    //Reset top and front views
-    for (UIView *view in self.topView.subviews) {
-        [view removeFromSuperview];
-    }
-    for (UIView *view in self.frontView.subviews) {
-        [view removeFromSuperview];
-    }
-    
-    //Add views
-    for (Element *element in self.currentProject.elements) {
-        [self setupElement:element];
-    }
-    
-}
 
 - (IBAction)trashDidTap
 {
@@ -98,6 +63,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    //Save current project
+    [self.currentProject save];
+    
     //Get the pointer to the popover to dismiss it in the future
     if ([segue isKindOfClass:[UIStoryboardPopoverSegue class]]) 
     {
@@ -133,20 +101,11 @@
     
     if ([currentprojectUPID length]<1) { //Initial situation with no current project
         
-        //Create new project
-        Project *newProject=[[Project alloc] initWithTitle:@"Default Project" author:@"Ikokoro Dreams"];
-        
-        newProject.resultPicture=[UIImage imageNamed:@"default image.jpg"];
-        newProject.details=@"This is the default project created by the app";
-                
-        //Set current project to the one just created
-        self.currentProject=newProject;
-        
+        //Create new project and assign to current
+        self.currentProject=[[Project alloc] initForDefaultProject];
+                        
         //Save it
         [self.currentProject save];
-        
-        //Init NSUserDEfaults
-        NSUserDefaults* userDefaults=[NSUserDefaults standardUserDefaults];
         
         //Save the current project UPID as the current UPID to NSUserDefaults
         [userDefaults setObject:self.currentProject.UPID forKey:@"ViewController.currentProjectUPID"];
@@ -165,6 +124,13 @@
         self.currentProject=[Project loadProjectWithUPID:currentprojectUPID];
     }
     
+    //Project show and setup
+    [self setupCurrentProject];
+}
+
+
+- (void)setupCurrentProject
+{
     //Show title and elements of the current project
     self.titleInView.text=self.currentProject.UPID;
     
@@ -184,8 +150,8 @@
     for (Element *element in self.currentProject.elements) {
         [self setupElement:element];
     }
-    
 }
+
 
 - (void)setupElement:(Element *)element
 {
@@ -222,34 +188,16 @@
     //Do actions only if the selected project is not the current one
     if (![project.UPID isEqualToString:self.currentProject.UPID]) {
         
-        //Set title
-        self.titleInView.text=project.UPID;
-        
         //Save current project
         [self.currentProject save];
         
-        //Load and show selected project
+        //Update current project
         self.currentProject=project;
         
-        //Reset arrays
-        [self.topViewElements removeAllObjects];
-        [self.frontViewElements removeAllObjects];
+        //Show current project
+        [self setupCurrentProject];
         
-        //Reset top and front views
-        for (UIView *view in self.topView.subviews) {
-            [view removeFromSuperview];
-        }
-        for (UIView *view in self.frontView.subviews) {
-            [view removeFromSuperview];
-        }
-        
-        //Add views
-        for (Element *element in self.currentProject.elements) {
-            [self setupElement:element];
-            NSLog(@"Element: %@",element);
-        }
-        
-        //Save current project UPID to NSUserDefaults
+        //Save current project UPID to NSUserDefaults to be the project showed when the app is loaded
         NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
         [userDefaults setValue:self.currentProject.UPID forKey:@"ViewController.currentProjectUPID"];
     }
@@ -405,10 +353,11 @@
     
     //Add element to elements array
     [self.currentProject.elements addObject:element];
-    
-    NSLog(@"Element: %@",element);
-    
+        
     [self setupElement:element];
+    
+    //Save updated current project
+    [self.currentProject save];
 }
 
 
@@ -437,6 +386,9 @@
         //Set actice elements to nil
         self.activeElementInTopView=nil;
         self.activeElementInFrontView=nil;
+        
+        //Save current project
+        [self.currentProject save];
     }
 }
 
@@ -465,7 +417,6 @@
     [self setTitleInView:nil];
     _popover=nil;
     _currentProject=nil;
-    //_currentUPID=nil;
 }
 
 
