@@ -26,6 +26,7 @@
 
 @implementation ProjetcsTableViewController
 
+@synthesize delegate=_delegate;
 @synthesize projectsMainInfo=_projectsMainInfo;
 @synthesize UPIDs=_UPIDs;
 @synthesize rowEdited=_rowEdited;
@@ -126,6 +127,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    _delegate=nil;
     _projectsMainInfo=nil;
     _UPIDs=nil;
 }
@@ -165,5 +167,46 @@
     return cell;
 }
 
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        //Get project to delete
+        Project* project=(Project*)[self.projectsMainInfo objectAtIndex:indexPath.row];
+        
+        //Check whether it can be deleted through the delegate
+        if ([self.delegate projectShouldDelete:project]) 
+        {
+            //Delete the project from the projects array
+            [self.projectsMainInfo removeObjectAtIndex:indexPath.row];
+            
+            //Delete the project UPID from the UPIDs array
+            [self.UPIDs removeObjectAtIndex:indexPath.row];
+            
+            //Save to NSUserDefaults the updated UPIDs array
+            [self saveUPIDs];
+            
+            // Delete the row from the data source
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+    }   
+}
+
+-(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView reloadData];
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [self.delegate projectDidSelect:nil]; //Testing
+}
 
 @end

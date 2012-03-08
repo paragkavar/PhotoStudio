@@ -118,7 +118,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="878-XW-8wv" kind="popover" popoverAnchorView="iAM-vf-r6c" id="pcE-zD-uqW">
+                                    <segue destination="878-XW-8wv" kind="popover" identifier="Projects" popoverAnchorView="iAM-vf-r6c" id="pcE-zD-uqW">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>
@@ -182,11 +182,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Project Main Info" rowHeight="110" id="CP6-wt-kWY">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Project Main Info" rowHeight="110" id="CP6-wt-kWY">
                                 <rect key="frame" x="0.0" y="22" width="300" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="280" height="109"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="267" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="N6X-5B-EJT" userLabel="Project title">
@@ -223,6 +223,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="sXF-2N-Gnm">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="x9l-pK-21T">
+                            <color key="tintColor" red="0.38823529410000002" green="0.68627450980000004" blue="0.81568627449999997" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <segue destination="CtD-uG-2Yn" kind="push" identifier="New Project" id="9K0-z7-IIY"/>
                             </connections>
@@ -318,7 +319,7 @@
                                             <rect key="frame" x="10" y="1" width="280" height="157"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="k3h-Ap-VHl">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="k3h-Ap-VHl">
                                                     <rect key="frame" x="11" y="5" width="259" height="148"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <gestureRecognizers/>
@@ -361,6 +362,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="CKe-jw-4Oi">
                         <barButtonItem key="rightBarButtonItem" title="Create Project" id="jrj-ib-TGG">
+                            <color key="tintColor" red="0.38823529410000002" green="0.68627450980000004" blue="0.81568627449999997" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="createProjectButtonDidTap:" destination="CtD-uG-2Yn" id="7o2-YA-z6n"/>
                             </connections>
@@ -715,6 +717,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="wxm-7n-5Il">
                         <barButtonItem key="rightBarButtonItem" title="Save Project" id="aCI-NX-aa9">
+                            <color key="tintColor" red="0.38823529410000002" green="0.68627450980000004" blue="0.81568627449999997" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="saveProjectButtonDidTap:" destination="i9m-2T-7BD" id="LBh-9Z-m8S"/>
                             </connections>

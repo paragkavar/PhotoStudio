@@ -10,7 +10,8 @@
 #import "GroupsTableViewController.h"
 #import "ElementSTVC.h"
 #import "Project.h"
+#import "ProjetcsTableViewController.h"
 
-@interface ViewController : UIViewController <ElementSTVCDelegate,ElementViewDelegate>
+@interface ViewController : UIViewController <ElementSTVCDelegate,ElementViewDelegate,ProjectsTableViewControllerDelegate>
 
 @end

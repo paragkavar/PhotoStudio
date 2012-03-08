@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, strong) Project *currentProject;
+//@property (nonatomic, strong) NSString *currentUPID;
 @property (strong, nonatomic) IBOutlet UIView *topView;
 @property (strong, nonatomic) IBOutlet UIView *frontView;
 @property (strong,nonatomic) NSMutableArray *topViewElements;
@@ -25,6 +26,7 @@
 - (void)setupElement:(Element *)element;
 - (void)handlePanInTopView:(UIPanGestureRecognizer *)gesture;
 - (void)handlePanInFrontView:(UIPanGestureRecognizer *)gesture;
+- (void)loadCurrentProject;
 
 @end
 
@@ -35,6 +37,7 @@
 
 @synthesize popover=_popover;
 @synthesize currentProject=_currentProject;
+//@synthesize currentUPID=_currentUPID;
 @synthesize titleInView=_titleInView;
 @synthesize topView=_topView;
 @synthesize frontView=_frontView;
@@ -104,9 +107,100 @@
         GroupsTableViewController *groupsTableViewController=(GroupsTableViewController *)navigationController.topViewController;
         groupsTableViewController.mainViewController=self;
     }
+    
+    if ([segue.identifier isEqualToString:@"Projects"]) {
+        UINavigationController *navigationController=(UINavigationController *)segue.destinationViewController;
+        ProjetcsTableViewController *projectsTableViewController=(ProjetcsTableViewController *)navigationController.topViewController;
+        projectsTableViewController.delegate=self;
+    }
 }
 
 #pragma mark - Private Methods -
+
+- (void)loadCurrentProject
+{
+    //
+    //RESET NSUserDefaults
+    //
+    //[NSUserDefaults resetStandardUserDefaults]; //It does nothing
+    
+    
+    //Load current project key from NSUserDEfaults
+    NSUserDefaults* userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    //Reset for testing 
+    //[userDefaults setObject:@"" forKey:@"ViewController.currentProjectUPID"];
+    
+    //self.currentProjectKey=[userDefaults objectForKey:@"ViewController.currentProject"];
+    NSString *currentprojectUPID=[userDefaults objectForKey:@"ViewController.currentProjectUPID"];
+    
+    if ([currentprojectUPID length]<1) { //Initial situation with no current project
+        
+        //Create new project
+        Project *newProject=[[Project alloc] init];
+        
+        newProject.UPID=@"ABCDEFGHIJ";
+        newProject.title=@"Default project";
+        newProject.author=@"ikokoro Dreams";
+        
+        //Set current date and time
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+        NSDateFormatter *timeFormatter=[[NSDateFormatter alloc] init];
+        [timeFormatter setDateFormat:@"HH:mm"];
+        
+        newProject.creationDate=[NSString stringWithFormat:@"%@  %@",[dateFormatter stringFromDate:[NSDate date]],[timeFormatter stringFromDate:[NSDate date]]];
+
+        newProject.resultPicture=[UIImage imageNamed:@"default image.jpg"];
+        newProject.details=@"This is the default project created by the app";
+        
+        //Set current project to the one just created
+        self.currentProject=newProject;
+        
+        //Save it
+        [self.currentProject save];
+        
+        //Init NSUserDEfaults
+        NSUserDefaults* userDefaults=[NSUserDefaults standardUserDefaults];
+        
+        //Save the current project UPID as the current UPID to NSUserDefaults
+        [userDefaults setObject:self.currentProject.UPID forKey:@"ViewController.currentProjectUPID"];
+        
+        //Create an array with the created UPID and save it to NSUserDefaults
+        NSArray *UPIDs=[NSArray arrayWithObject:self.currentProject.UPID];
+        [userDefaults setObject:UPIDs forKey:@"UPIDs"];
+        [userDefaults synchronize];
+        
+        //NOTE: Things stored in NSUserDEfaults:
+        // 1. @"ViewController.currentProjectUPID"
+        // 2. @"UPIDs"
+        // 3. Each project where the NSUserDefaults key is the UPID
+    }
+    else {
+        self.currentProject=[Project loadProjectWithUPID:currentprojectUPID];
+    }
+    
+    //Show title and elements of the current project
+    self.titleInView.text=self.currentProject.UPID;
+    
+    //Reset arrays
+    [self.topViewElements removeAllObjects];
+    [self.frontViewElements removeAllObjects];
+    
+    //Reset top and front views
+    for (UIView *view in self.topView.subviews) {
+        [view removeFromSuperview];
+    }
+    for (UIView *view in self.frontView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    //Add views
+    for (Element *element in self.currentProject.elements) {
+        [self setupElement:element];
+    }
+    
+}
 
 - (void)setupElement:(Element *)element
 {
@@ -135,6 +229,60 @@
     [self.frontView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:element.frontView action:@selector(handlePinch:)]]; 
 }
 
+
+#pragma mark - ProjectsTableViewControllerDelegate -
+
+-(void)projectDidSelect:(Project *)project
+{
+    if (![project.UPID isEqualToString:self.currentProject.UPID]) {
+        //Save current project
+        
+        //Dismiss popover
+        
+        //Load and show selected project
+        
+        //Save current project UPID to NSUserDefaults
+    }
+    /*
+    //Update current project
+    self.currentProject=project;
+    self.currentProjectKey=project.uniqueKey;
+    self.infoLabel.text=self.currentProjectKey;
+    
+    NSLog(@"Loaded project with key: %@",self.currentProjectKey);
+    
+    //Save current project key
+    NSUserDefaults* userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:self.currentProjectKey forKey:@"CURRENT_PROJECT_KEY"];
+    
+    //Dismiss popover because the popover delegate is not called in this case
+    [self.projectsPopoverController dismissPopoverAnimated:YES];
+    [self.projectsPopoverController release];
+    NSLog(@"Projects popover released");
+     */
+}
+
+-(BOOL)projectShouldDelete:(Project *)project
+{
+    if ([project.UPID isEqualToString:self.currentProject.UPID]) { //Change condition
+        
+        //Show alert
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Current Project cannot be deleted" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        
+        return NO;
+    }
+    else {
+        //Show alert
+        
+        return YES;
+    }
+}
+
+-(void)projectDidDelete:(Project *)project
+{
+    
+}
 
 #pragma mark - ElementViewDelegate methods -
 
@@ -297,13 +445,6 @@
 
 - (void)viewDidLoad
 {
-    //Create a void current project
-    self.currentProject=[[Project alloc] init];
-    self.currentProject.UPID=@"Test Project";
-    
-    //Set title
-    //self.titleInView.text=self.currentProject.UPID;
-    
     //Init arrays
     self.topViewElements=[NSMutableArray arrayWithCapacity:1];
     self.frontViewElements=[NSMutableArray arrayWithCapacity:1];
@@ -311,11 +452,21 @@
     //Init project elements array
     self.currentProject.elements=[NSMutableArray arrayWithCapacity:1];
 }
+
+//CAUTION here when returning from the popover (Projects or elements)
+//CHECKED: This method is not called when dismissing the popover
+- (void)viewDidAppear:(BOOL)animated
+{
+    //Load current project
+    [self loadCurrentProject];
+}
+
 - (void)viewDidUnload
 {
     [self setTitleInView:nil];
     _popover=nil;
     _currentProject=nil;
+    //_currentUPID=nil;
 }
 
 

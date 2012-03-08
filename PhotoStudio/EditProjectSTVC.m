@@ -8,7 +8,7 @@
 
 #import "EditProjectSTVC.h"
 
-@interface EditProjectSTVC() <UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
+@interface EditProjectSTVC() <UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *title;
 @property (weak, nonatomic) IBOutlet UITextField *author;
@@ -21,8 +21,6 @@
 
 - (void)textViewButtonDidTap;
 - (void)handleTap;
-- (void)showAlertView;
-- (void)showImagePicker;
 
 @end
 
@@ -39,17 +37,6 @@
 @synthesize imageCell;
 
 @synthesize myPopoverController=_myPopoverController;
-
-
-static int imagePickerViewsCount=0;
-
-
-#pragma mark - UIAlertViewDelegate -
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    [self showImagePicker];
-}
 
 
 #pragma mark - UIImagePicker delegate methods -
@@ -72,13 +59,8 @@ static int imagePickerViewsCount=0;
     [self.details resignFirstResponder];
 }
 
-- (void)showAlertView
-{
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"First time loading Photo Library" message:@"it will take some seconds" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-}
 
-- (void)showImagePicker
+- (void)handleTap
 {
     //Call UIImagePicker
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]==YES) 
@@ -99,17 +81,6 @@ static int imagePickerViewsCount=0;
         ////Create the popover controller and show the UIImagePicker from it (mandatory in the iPad)
         self.myPopoverController=[[UIPopoverController alloc] initWithContentViewController:mediaUI];
         [self.myPopoverController presentPopoverFromRect:CGRectMake(100, 100, 200, 200) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    }
-}
-
-- (void)handleTap
-{
-    if (imagePickerViewsCount==0) {
-        [self showAlertView];
-        imagePickerViewsCount++;
-    }
-    else {
-        [self showImagePicker];
     }
 }
 
@@ -159,6 +130,8 @@ static int imagePickerViewsCount=0;
     [self setDetails:nil];
     [self setImageView:nil];
     [self setImageCell:nil];
+    
+    _myPopoverController=nil;
 }
 
 

@@ -8,7 +8,7 @@
 
 #import "NewProjectSTVC.h"
 
-@interface NewProjectSTVC() <UITextFieldDelegate,UITextViewDelegate>
+@interface NewProjectSTVC() <UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *title;
 @property (weak, nonatomic) IBOutlet UITextField *author;
@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *details;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITableViewCell *imageCell;
+
+@property (nonatomic, strong) UIPopoverController *myPopoverController;
 
 - (void)textViewButtonDidTap;
 
@@ -32,6 +34,21 @@
 @synthesize imageView;
 @synthesize imageCell;
 
+@synthesize myPopoverController=_myPopoverController;
+
+
+#pragma mark - UIImagePicker delegate methods -
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+    //Dismiss UIImagePickerController
+    [self.myPopoverController dismissPopoverAnimated:YES];
+    
+    //Add image
+    //self.imageView.image=[self adaptImage:image forSize:CGSizeMake(100, 80)];
+    self.imageView.image=[ImageHelper getImageAndReduceImage:image toCropInView:self.imageView];
+}
+
 #pragma mark - Private methods -
 
 - (void)textViewButtonDidTap
@@ -40,10 +57,31 @@
     [self.details resignFirstResponder];
 }
 
+
 - (void)handleTap
 {
-    //Call picture manager
+    //Call UIImagePicker
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]==YES) 
+    {
+        //Create UIImagePickerController
+        UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
+        
+        //With both to these values we will be able to access any picture at the iPad
+        mediaUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        mediaUI.mediaTypes=[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        
+        //Hides the controls for moving & scaling pictures, or for trimming movies. To instead show the controls, use YES.
+        mediaUI.allowsEditing = NO;
+        
+        //Set delegate
+        mediaUI.delegate = self;
+        
+        ////Create the popover controller and show the UIImagePicker from it (mandatory in the iPad)
+        self.myPopoverController=[[UIPopoverController alloc] initWithContentViewController:mediaUI];
+        [self.myPopoverController presentPopoverFromRect:CGRectMake(100, 100, 200, 200) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
+
 
 - (IBAction)createProjectButtonDidTap:(id)sender 
 {
@@ -100,6 +138,7 @@
     [self setDetails:nil];
     [self setImageView:nil];
     [self setImageCell:nil];
+    _myPopoverController=nil;
     [super viewDidUnload];
 }
 
