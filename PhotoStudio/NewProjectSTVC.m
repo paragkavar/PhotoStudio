@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *title;
 @property (weak, nonatomic) IBOutlet UITextField *author;
-@property (weak, nonatomic) IBOutlet UITextField *creationDate;
+//@property (weak, nonatomic) IBOutlet UITextField *creationDate;
 @property (weak, nonatomic) IBOutlet UITextView *details;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITableViewCell *imageCell;
@@ -29,7 +29,7 @@
 @synthesize delegate=_delegate;
 @synthesize title;
 @synthesize author;
-@synthesize creationDate;
+//@synthesize creationDate;
 @synthesize details;
 @synthesize imageView;
 @synthesize imageCell;
@@ -86,13 +86,15 @@
 - (IBAction)createProjectButtonDidTap:(id)sender 
 {
     //Create project from fields
-    Project *newProject=[[Project alloc] init];
-    newProject.title=self.title.text;
-    newProject.author=self.author.text;
-    newProject.creationDate=self.creationDate.text;
+    Project *newProject=[[Project alloc] initWithTitle:self.title.text author:self.author.text];
+    //newProject.title=self.title.text;
+    //newProject.author=self.author.text;
+    //newProject.creationDate=self.creationDate.text;
     newProject.details=self.details.text;
     newProject.resultPicture=self.imageView.image;
+    //newProject.elements=[NSMutableArray arrayWithCapacity:1];
     
+    /*
     // Generate random string of 10 that will be the UPID to store this project
     int randomStringLength=10;
     NSString *chars = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -103,6 +105,7 @@
     }
     
     newProject.UPID=randomString;
+     */
     
     //Call delegate
     [self.delegate projectDidCreate:newProject];
@@ -118,12 +121,14 @@
     self.author.delegate=self;
     self.details.delegate=self;
     
+    /*
     //Set current date and time
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
     NSDateFormatter *timeFormatter=[[NSDateFormatter alloc] init];
     [timeFormatter setDateFormat:@"HH:mm"];
     self.creationDate.text=[NSString stringWithFormat:@"%@  %@",[dateFormatter stringFromDate:[NSDate date]],[timeFormatter stringFromDate:[NSDate date]]];
+     */
     
     //Add tap gesture recognizer to the image view
     [self.imageCell addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap)]];
@@ -134,7 +139,7 @@
     _delegate=nil;
     [self setTitle:nil];
     [self setAuthor:nil];
-    [self setCreationDate:nil];
+    //[self setCreationDate:nil];
     [self setDetails:nil];
     [self setImageView:nil];
     [self setImageCell:nil];

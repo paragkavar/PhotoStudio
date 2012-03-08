@@ -44,7 +44,7 @@
     
     //With the projects UPIDs, load the project's main info (little memory footprint)
     for (NSString* projectUPID in self.UPIDs) {
-        [self.projectsMainInfo addObject:[Project loadProjectMainInfoWithUPID:projectUPID]];
+        [self.projectsMainInfo addObject:[Project loadProjectWithUPID:projectUPID]];
     }
 }
 
@@ -68,7 +68,9 @@
         editprojectSTVC.delegate=self;
         
         //Get and store the selected row
-        self.rowEdited=self.tableView.indexPathForSelectedRow.row;
+        //self.rowEdited=self.tableView.indexPathForSelectedRow.row;
+        
+        NSLog(@"Row edited: %d",self.rowEdited);
         
         //Load the full project, getting the UPID from the project at the selected row
         editprojectSTVC.editingProject=[Project loadProjectWithUPID:[(Project *)[self.projectsMainInfo objectAtIndex:self.rowEdited] UPID]];
@@ -204,9 +206,16 @@
     [self.tableView reloadData];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.delegate projectDidSelect:[self.projectsMainInfo objectAtIndex:indexPath.row]];
+}
+
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate projectDidSelect:nil]; //Testing
+    NSLog(@"IndexPath.row = %d",indexPath.row);
+    self.rowEdited=indexPath.row;
+    [self performSegueWithIdentifier:@"Edit Project" sender:self];
 }
 
 @end

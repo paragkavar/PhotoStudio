@@ -18,6 +18,46 @@
 @synthesize creationDate=_creationDate;
 @synthesize details=_details;
 
+//It will set UPID, creationDate and init the elements array
+- (id)init
+{
+    if (self=[super init]) {
+        
+        //Init elements array (VERY IMPORTANT)
+        self.elements=[NSMutableArray arrayWithCapacity:1];
+        
+        //Generate random string of 10 that will be the UPID to store this project
+        int randomStringLength=10;
+        NSString *chars = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        NSMutableString *randomString = [NSMutableString stringWithCapacity:randomStringLength];
+        srand(time(NULL));
+        for (int i=0; i<randomStringLength; i++) {
+            [randomString appendFormat:@"%c",[chars characterAtIndex:rand()%[chars length]]];
+        }
+        
+        //Set UPID
+        self.UPID=randomString;  
+        
+        //Get current date and time
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+        NSDateFormatter *timeFormatter=[[NSDateFormatter alloc] init];
+        [timeFormatter setDateFormat:@"HH:mm"];
+        
+        //Set crationDate
+        self.creationDate=[NSString stringWithFormat:@"%@  %@",[dateFormatter stringFromDate:[NSDate date]],[timeFormatter stringFromDate:[NSDate date]]];        
+    }
+    return self;
+}
+
+- (id)initWithTitle:(NSString *)title author:(NSString *)author
+{
+    if (self=[self init]) {
+        self.title=title;
+        self.author=author;
+    }
+    return self;
+}
 
 + (Project *)loadProjectWithUPID:(NSString *)uPID
 {
@@ -40,16 +80,6 @@
     return project;    
 }
 
-+ (Project *)loadProjectMainInfoWithUPID:(NSString *)uPID
-{
-    //Load full project
-    Project *projectMainInfo=[self loadProjectWithUPID:uPID];
-    
-    //Set elements list to nil to reduce the memory footprint
-    projectMainInfo.elements=nil;
-    
-    return projectMainInfo;
-}
 
 - (void)save
 {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="2">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
@@ -190,7 +190,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="N6X-5B-EJT" userLabel="Project title">
-                                            <rect key="frame" x="139" y="39" width="134" height="21"/>
+                                            <rect key="frame" x="139" y="20" width="134" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -211,9 +211,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="i9m-2T-7BD" kind="push" identifier="Edit Project" id="ggx-E4-baT"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -230,6 +227,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <segue destination="i9m-2T-7BD" kind="push" identifier="Edit Project" id="Sgd-GE-gha"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="553" y="-301"/>
@@ -288,32 +288,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Creation Date" id="5aM-mg-yFB">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="OWo-zc-9tO">
-                                        <rect key="frame" x="0.0" y="214" width="300" height="46"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" id="4Bn-DD-l3e">
-                                                    <rect key="frame" x="8" y="6" width="265" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation"/>
-                                                </textField>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="Photo" footerTitle="tap above to add a photo" id="WyG-MA-jIw">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="158" id="NiQ-gJ-Amw">
-                                        <rect key="frame" x="0.0" y="304" width="300" height="160"/>
+                                        <rect key="frame" x="0.0" y="214" width="300" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="280" height="157"/>
@@ -334,7 +312,7 @@
                             <tableViewSection headerTitle="Project Details" id="9DY-AW-eiq">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="81" id="H0W-r7-XyH">
-                                        <rect key="frame" x="0.0" y="529" width="300" height="83"/>
+                                        <rect key="frame" x="0.0" y="439" width="300" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="280" height="80"/>
@@ -371,7 +349,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="author" destination="abK-Gr-tvq" id="PJU-po-z7C"/>
-                        <outlet property="creationDate" destination="4Bn-DD-l3e" id="LKk-zj-HNT"/>
                         <outlet property="details" destination="ucl-CU-txo" id="h7V-tq-i8C"/>
                         <outlet property="imageCell" destination="NiQ-gJ-Amw" id="Yf1-oM-MWX"/>
                         <outlet property="imageView" destination="k3h-Ap-VHl" id="F8f-mI-34y"/>
@@ -740,54 +717,6 @@
     <resources>
         <image name="trash.png" width="128" height="128"/>
     </resources>
-    <classes>
-        <class className="EditProjectSTVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditProjectSTVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="author" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="creationDate" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="details" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="imageCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="title" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ElementSTVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ElementSTVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="frontView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="topView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="ElementsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ElementsTableViewController.h"/>
-        </class>
-        <class className="GroupsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GroupsTableViewController.h"/>
-        </class>
-        <class className="NewProjectSTVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewProjectSTVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="author" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="creationDate" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="details" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="imageCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="title" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ProjetcsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProjetcsTableViewController.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="frontView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="titleInView" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="topView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

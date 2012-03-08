@@ -52,6 +52,9 @@
 - (IBAction)saveProjectButtonDidTap
 {
     [self.currentProject save];
+    for (Element *element in self.currentProject.elements) {
+        NSLog(@"Elements when saving project: %@",element);
+    }
 }
 
 - (IBAction)loadProjectButtonDidTap
@@ -119,12 +122,6 @@
 
 - (void)loadCurrentProject
 {
-    //
-    //RESET NSUserDefaults
-    //
-    //[NSUserDefaults resetStandardUserDefaults]; //It does nothing
-    
-    
     //Load current project key from NSUserDEfaults
     NSUserDefaults* userDefaults=[NSUserDefaults standardUserDefaults];
     
@@ -137,23 +134,11 @@
     if ([currentprojectUPID length]<1) { //Initial situation with no current project
         
         //Create new project
-        Project *newProject=[[Project alloc] init];
+        Project *newProject=[[Project alloc] initWithTitle:@"Default Project" author:@"Ikokoro Dreams"];
         
-        newProject.UPID=@"ABCDEFGHIJ";
-        newProject.title=@"Default project";
-        newProject.author=@"ikokoro Dreams";
-        
-        //Set current date and time
-        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-        NSDateFormatter *timeFormatter=[[NSDateFormatter alloc] init];
-        [timeFormatter setDateFormat:@"HH:mm"];
-        
-        newProject.creationDate=[NSString stringWithFormat:@"%@  %@",[dateFormatter stringFromDate:[NSDate date]],[timeFormatter stringFromDate:[NSDate date]]];
-
         newProject.resultPicture=[UIImage imageNamed:@"default image.jpg"];
         newProject.details=@"This is the default project created by the app";
-        
+                
         //Set current project to the one just created
         self.currentProject=newProject;
         
@@ -234,33 +219,45 @@
 
 -(void)projectDidSelect:(Project *)project
 {
+    //Do actions only if the selected project is not the current one
     if (![project.UPID isEqualToString:self.currentProject.UPID]) {
-        //Save current project
         
-        //Dismiss popover
+        //Set title
+        self.titleInView.text=project.UPID;
+        
+        //Save current project
+        [self.currentProject save];
         
         //Load and show selected project
+        self.currentProject=project;
+        
+        //Reset arrays
+        [self.topViewElements removeAllObjects];
+        [self.frontViewElements removeAllObjects];
+        
+        //Reset top and front views
+        for (UIView *view in self.topView.subviews) {
+            [view removeFromSuperview];
+        }
+        for (UIView *view in self.frontView.subviews) {
+            [view removeFromSuperview];
+        }
+        
+        //Add views
+        for (Element *element in self.currentProject.elements) {
+            [self setupElement:element];
+            NSLog(@"Element: %@",element);
+        }
         
         //Save current project UPID to NSUserDefaults
+        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+        [userDefaults setValue:self.currentProject.UPID forKey:@"ViewController.currentProjectUPID"];
     }
-    /*
-    //Update current project
-    self.currentProject=project;
-    self.currentProjectKey=project.uniqueKey;
-    self.infoLabel.text=self.currentProjectKey;
     
-    NSLog(@"Loaded project with key: %@",self.currentProjectKey);
-    
-    //Save current project key
-    NSUserDefaults* userDefaults=[NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:self.currentProjectKey forKey:@"CURRENT_PROJECT_KEY"];
-    
-    //Dismiss popover because the popover delegate is not called in this case
-    [self.projectsPopoverController dismissPopoverAnimated:YES];
-    [self.projectsPopoverController release];
-    NSLog(@"Projects popover released");
-     */
+    //Dismiss popover
+    [self.popover dismissPopoverAnimated:YES];
 }
+
 
 -(BOOL)projectShouldDelete:(Project *)project
 {
@@ -408,6 +405,8 @@
     
     //Add element to elements array
     [self.currentProject.elements addObject:element];
+    
+    NSLog(@"Element: %@",element);
     
     [self setupElement:element];
 }

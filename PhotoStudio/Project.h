@@ -19,8 +19,8 @@
 @property (nonatomic, strong) NSString *details;
 
 
+- (id)initWithTitle:(NSString *)title author:(NSString *)author;
 - (void)save;
 + (Project *)loadProjectWithUPID:(NSString *)uPID;
-+ (Project *)loadProjectMainInfoWithUPID:(NSString *)uPID;
 
 @end
