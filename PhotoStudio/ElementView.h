@@ -21,6 +21,7 @@
 @property (nonatomic,weak) id <ElementViewDelegate> delegate;
 @property (nonatomic, readwrite) BOOL active;
 @property (nonatomic,strong) UIImageView *imageView;
+@property (nonatomic, strong) NSString *labelText;
 
 - (id)initWithFrame:(CGRect)frame andImage:(NSString *)imageName;
 

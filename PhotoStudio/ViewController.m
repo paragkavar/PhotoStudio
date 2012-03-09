@@ -9,7 +9,8 @@
 #import "ViewController.h"
 
 
-@interface ViewController() <UIAlertViewDelegate>
+
+@interface ViewController() <UIAlertViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, strong) Project *currentProject;
@@ -20,6 +21,8 @@
 @property (weak,nonatomic) ElementView *activeElementInTopView;
 @property (weak,nonatomic) ElementView *activeElementInFrontView;
 @property (weak, nonatomic) IBOutlet UILabel *titleInView;
+//@property (nonatomic, strong) UIAlertView *labelAlertView;
+//@property (nonatomic, strong) UIAlertView *removeElementAlertView;
 
 
 - (void)setupCurrentProject;
@@ -44,6 +47,8 @@
 @synthesize frontViewElements=_frontViewElements;
 @synthesize activeElementInTopView=_activeElementInTopView;
 @synthesize activeElementInFrontView=_activeElementInFrontView;
+//@synthesize labelAlertView=_labelAlertView;
+//@synthesize removeElementAlertView=_removeElementAlertView;
 
 
 #pragma mark - IBAction methods -
@@ -53,9 +58,19 @@
 {
     if (self.activeElementInTopView || self.activeElementInFrontView) {
         //Show alert view with delete confirmation
-        UIAlertView *trashAlertView=[[UIAlertView alloc] initWithTitle:@"ATENTION" message:@"The selected element will be deleted" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
-        [trashAlertView show];
+        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"ATENTION" message:@"The selected element will be deleted" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+        alertView.tag=100;
+        [alertView show];
     }
+}
+
+- (IBAction)addLabelButtonDidTap
+{
+    UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"New Label Text:" message:nil delegate:self cancelButtonTitle:@"Top" otherButtonTitles:@"Front", nil];
+    alertView.alertViewStyle=UIAlertViewStylePlainTextInput;
+    alertView.tag=101;
+    [alertView show];
+    
 }
 
 
@@ -87,6 +102,7 @@
 }
 
 #pragma mark - Private Methods -
+
 
 - (void)loadCurrentProject
 {
@@ -212,8 +228,8 @@
     if ([project.UPID isEqualToString:self.currentProject.UPID]) {
         
         //Show alert
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Current Project cannot be deleted" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"Current Project cannot be deleted" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
         
         return NO;
     }
@@ -347,7 +363,49 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex==0) {
+    if (alertView.tag==101) { //Add label
+        
+        if ([[[alertView textFieldAtIndex:0] text] length]>0) { //Check that the text is not void
+            
+            //This element will have a visible view only in one view
+            
+            //Create the element
+            Element *labelElement=[[Element alloc] init];
+            UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+            label.text=[[alertView textFieldAtIndex:0] text];
+            label.backgroundColor=[UIColor clearColor];
+            label.textAlignment=UITextAlignmentCenter;
+            
+            
+            if (buttonIndex==0) { //Add only to top view
+                labelElement.topView=[[ElementView alloc] initWithFrame:label.frame andImage:nil];
+                [labelElement.topView addSubview:label];
+                labelElement.topView.labelText=label.text;
+                
+                labelElement.frontView=[[ElementView alloc] initWithFrame:CGRectZero];
+                labelElement.frontView.labelText=@"Void Label";
+            }
+            if (buttonIndex==1) { //Add only to front view
+                labelElement.topView=[[ElementView alloc] initWithFrame:CGRectZero];
+                labelElement.topView.labelText=@"Void Label";
+                
+                labelElement.frontView=[[ElementView alloc] initWithFrame:label.frame andImage:nil];
+                [labelElement.frontView addSubview:label];
+                labelElement.frontView.labelText=label.text;
+            }
+            
+            
+            //Add element to elements array
+            [self.currentProject.elements addObject:labelElement];
+            
+            [self setupElement:labelElement];
+            
+            //Save updated current project
+            [self.currentProject save];       
+        }        
+    }
+    
+    if (alertView.tag==100) { //Remove element
         //Delete selected element from views
         [self.activeElementInTopView removeFromSuperview];
         [self.activeElementInFrontView removeFromSuperview];
@@ -374,6 +432,15 @@
     }
 }
 
+#pragma mark - UITextFieldDelegate -
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
 #pragma mark - View life cycle methods -
 
 - (void)viewDidLoad
@@ -399,6 +466,8 @@
     [self setTitleInView:nil];
     _popover=nil;
     _currentProject=nil;
+    //_labelAlertView=nil;
+    //_removeElementAlertView=nil;
 }
 
 

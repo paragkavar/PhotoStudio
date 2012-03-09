@@ -17,6 +17,7 @@
 @synthesize delegate=_delegate;
 @synthesize active=_active;
 @synthesize imageView=_imageView;
+@synthesize labelText=_labelText;
 
 #pragma mark - Setters & getters
 
@@ -193,6 +194,31 @@
         //Add the imageView to the topView
         [self addSubview:self.imageView];
         
+        self.labelText=[aDecoder decodeObjectForKey:@"ElementView.labelText"];
+        
+        //***
+        //If there is a text, then create and add the label
+        if ([self.labelText length]>0) {
+            if ([self.labelText isEqualToString:@"Void Label"]) { //The label is added to the other view
+                self.frame=CGRectZero;
+            }
+            else {
+                //Create label with the property text
+                UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+                label.text=self.labelText;
+                label.backgroundColor=[UIColor clearColor];
+                label.textAlignment=UITextAlignmentCenter;
+                
+                //Set the ElementView frame to the label frame
+                self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y, label.frame.size.width, label.frame.size.height);
+                
+                //Add as a subview
+                [self addSubview:label];
+            }
+        }
+        //***
+        
+        
         //Get the center position
         CGFloat x=[aDecoder decodeFloatForKey:@"Element.center.x"];
         CGFloat y=[aDecoder decodeFloatForKey:@"Element.center.y"];
@@ -208,6 +234,7 @@
         CGFloat ty=[aDecoder decodeFloatForKey:@"Element.transform.ty"];
         
         self.transform=CGAffineTransformMake(a, b, c, d, tx, ty);
+        
     }
     return self;
 }
@@ -225,6 +252,8 @@
     [aCoder encodeFloat:self.transform.d forKey:@"Element.transform.d"];
     [aCoder encodeFloat:self.transform.tx forKey:@"Element.transform.tx"];
     [aCoder encodeFloat:self.transform.ty forKey:@"Element.transform.ty"];
+    
+    [aCoder encodeObject:self.labelText forKey:@"ElementView.labelText"];
 }
 
 
