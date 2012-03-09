@@ -84,10 +84,21 @@
 - (void)handleRotation:(UIRotationGestureRecognizer*)gesture 
 {
     if ((gesture.state == UIGestureRecognizerStateChanged) ||
-        (gesture.state == UIGestureRecognizerStateEnded)) {
+        (gesture.state == UIGestureRecognizerStateEnded)) 
+    {
+        //Get active view
+        ElementView *activeView=[self.delegate getActiveViewForView:self.superview];
         
-        //Get the active element because this gesture is recognized by the superview
+        //Save current transform
+        CGAffineTransform currentTransform=activeView.transform;
+        
+        //Apply rotation
         [self.delegate getActiveViewForView:self.superview].transform=CGAffineTransformRotate([self.delegate getActiveViewForView:self.superview].transform, gesture.rotation);
+        
+        //Return to current orientation if it is outside limits
+        if (![activeView isElementBetweenLimits]) {
+            activeView.transform=currentTransform;
+        }
     }
     
     [gesture setRotation:0.0];
@@ -96,13 +107,64 @@
 - (void)handlePinch:(UIPinchGestureRecognizer*)gesture 
 {
     if ((gesture.state == UIGestureRecognizerStateChanged) ||
-        (gesture.state == UIGestureRecognizerStateEnded)) {
-        [self.delegate getActiveViewForView:self.superview].transform=CGAffineTransformScale([self.delegate getActiveViewForView:self.superview].transform, gesture.scale, gesture.scale);
-        NSLog(@"Scale: %f",gesture.scale);
+        (gesture.state == UIGestureRecognizerStateEnded)) 
+    {
+        //Get active view
+        ElementView *activeView=[self.delegate getActiveViewForView:self.superview];
+        
+        //Save current transform
+        CGAffineTransform currentTransform=activeView.transform;
+        
+        //Apply pinch
+        activeView.transform=CGAffineTransformScale(activeView.transform, gesture.scale, gesture.scale);
+        
+        //Return to current size if it is outside limits
+        if (![activeView isElementBetweenLimits]) {
+            activeView.transform=currentTransform;
+        }
     }
     
     [gesture setScale:1.0];
 }
+
+- (BOOL)isElementBetweenLimits
+{    
+    //Check x axis right limit
+    if (self.frame.origin.x + self.frame.size.width > self.superview.bounds.size.width) return NO;
+    
+    //Check x axis left limit
+    if (self.frame.origin.x <0) return NO;
+    
+    //Check y axis upper limit
+    if (self.frame.origin.y <0) return NO;
+    
+    //Check y axis lower limit
+    if (self.frame.origin.y + self.frame.size.height > self.superview.bounds.size.height) return NO;
+    
+    return YES;
+}
+
+
+- (CGPoint)getCenterInBetweenLimits
+{
+    //Get the center point for the view
+    CGPoint center=self.center;
+    
+    //Check x axis right limit
+    if (self.frame.origin.x + self.frame.size.width > self.superview.bounds.size.width) center.x=(self.superview.bounds.size.width + self.frame.origin.x)/2;
+    
+    //Check x axis left limit
+    if (self.frame.origin.x <0) center.x=self.frame.size.width/2;
+    
+    //Check y axis upper limit
+    if (self.frame.origin.y <0) center.y=self.frame.size.height/2;
+    
+    //Check y axis lower limit
+    if (self.frame.origin.y + self.frame.size.height > self.superview.bounds.size.height) center.y=(self.superview.bounds.size.height + self.frame.origin.y)/2;
+    
+    return center;
+}
+
 
 #pragma mark - Draw methods -
 

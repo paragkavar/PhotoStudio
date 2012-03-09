@@ -209,7 +209,7 @@
 
 -(BOOL)projectShouldDelete:(Project *)project
 {
-    if ([project.UPID isEqualToString:self.currentProject.UPID]) { //Change condition
+    if ([project.UPID isEqualToString:self.currentProject.UPID]) {
         
         //Show alert
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Current Project cannot be deleted" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -217,11 +217,7 @@
         
         return NO;
     }
-    else {
-        //Show alert
-        
-        return YES;
-    }
+    else return YES;
 }
 
 -(void)projectDidDelete:(Project *)project
@@ -285,35 +281,21 @@
     if ((gesture.state == UIGestureRecognizerStateChanged) ||
         (gesture.state == UIGestureRecognizerStateEnded)) 
     {
-        
-        //Check view limits before translating
+        //Get translation
         CGPoint translation = [gesture translationInView:self.topView];
         
+        //Set new position for the element in each view (top & front)
         self.activeElementInTopView.center=CGPointMake(self.activeElementInTopView.center.x + translation.x, 
                                                        self.activeElementInTopView.center.y + translation.y);
         
         self.activeElementInFrontView.center=CGPointMake(self.activeElementInFrontView.center.x + translation.x, 
                                                          self.activeElementInFrontView.center.y);
-        //Check limits
-        //
-        //Right limit
-        if (self.activeElementInTopView.center.x > self.topView.bounds.size.width) {
-            self.activeElementInTopView.center = CGPointMake(self.topView.bounds.size.width,self.activeElementInTopView.center.y);
-            self.activeElementInFrontView.center = CGPointMake(self.frontView.bounds.size.width, self.activeElementInFrontView.center.y);
-        }
         
-        //Left limit
-        if (self.activeElementInTopView.center.x < 0) {
-            self.activeElementInTopView.center = CGPointMake(0,self.activeElementInTopView.center.y);
-            self.activeElementInFrontView.center = CGPointMake(0, self.activeElementInFrontView.center.y);
-        }        
+        //Maintain center in between limits
+        self.activeElementInTopView.center=[self.activeElementInTopView getCenterInBetweenLimits];
+        self.activeElementInFrontView.center=[self.activeElementInFrontView getCenterInBetweenLimits];
         
-        //Scale
-        CGFloat scale;
-        scale=1+(translation.y/500.0);
-        
-        self.activeElementInFrontView.transform=CGAffineTransformScale(self.activeElementInFrontView.transform, scale, scale);
-        
+        //Reset gesture recognizer
         [gesture setTranslation:CGPointZero inView:self.topView];
     }
 }
@@ -324,21 +306,21 @@
         (gesture.state == UIGestureRecognizerStateEnded)) 
     {
         
-        //Check view limits before translating
+        //Get translation
         CGPoint translation = [gesture translationInView:self.frontView];
         
+        //Set new position for the element in each view (top & front)
         self.activeElementInTopView.center=CGPointMake(self.activeElementInTopView.center.x + translation.x, 
                                                        self.activeElementInTopView.center.y);
         
         self.activeElementInFrontView.center=CGPointMake(self.activeElementInFrontView.center.x + translation.x, 
                                                          self.activeElementInFrontView.center.y + translation.y);
         
-        //Scale
-        CGFloat scale;
-        scale=1-(translation.y/500.0);
+        //Maintain center in between limits
+        self.activeElementInTopView.center=[self.activeElementInTopView getCenterInBetweenLimits];
+        self.activeElementInFrontView.center=[self.activeElementInFrontView getCenterInBetweenLimits];
         
-        self.activeElementInTopView.transform=CGAffineTransformScale(self.activeElementInTopView.transform, scale, scale);
-        
+        //Reset gesture recognizer
         [gesture setTranslation:CGPointZero inView:self.frontView];
     }
 }

@@ -24,4 +24,7 @@
 
 - (id)initWithFrame:(CGRect)frame andImage:(NSString *)imageName;
 
+- (CGPoint)getCenterInBetweenLimits;
+- (BOOL)isElementBetweenLimits;
+
 @end
