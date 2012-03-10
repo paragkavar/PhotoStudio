@@ -29,8 +29,8 @@
     //Create the element
     Element *newElement=[[Element alloc] init];
     
-    newElement.topView=[[ElementView alloc] initWithFrame:CGRectMake(100, 100, 100, 100) andImage:[NSString stringWithFormat:@"%@.top.png",self.groupAndName]];
-    newElement.frontView=[[ElementView alloc] initWithFrame:CGRectMake(100, 100, 100, 100) andImage:[NSString stringWithFormat:@"%@.front.png",self.groupAndName]];
+    newElement.topView=[[ImageElement alloc] initWithFrame:CGRectMake(100, 100, 100, 100) andImage:[NSString stringWithFormat:@"%@.top.png",self.groupAndName]];
+    newElement.frontView=[[ImageElement alloc] initWithFrame:CGRectMake(100, 100, 100, 100) andImage:[NSString stringWithFormat:@"%@.front.png",self.groupAndName]];
     
     //Call delegate with selected element
     [self.delegate elementDidSelect:newElement];

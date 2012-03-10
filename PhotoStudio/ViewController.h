@@ -11,6 +11,7 @@
 #import "ElementSTVC.h"
 #import "Project.h"
 #import "ProjetcsTableViewController.h"
+#import "LabelElement.h"
 
 @interface ViewController : UIViewController <ElementSTVCDelegate,ElementViewDelegate,ProjectsTableViewControllerDelegate>
 

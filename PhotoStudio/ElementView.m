@@ -16,8 +16,9 @@
 
 @synthesize delegate=_delegate;
 @synthesize active=_active;
-@synthesize imageView=_imageView;
-@synthesize labelText=_labelText;
+
+@synthesize auxTransform=_auxTransform;
+@synthesize auxCenter=_auxCenter;
 
 #pragma mark - Setters & getters
 
@@ -37,29 +38,19 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        //Set ElementView properties
+        self.active=NO;
+        
+        //Set UIView properties
+        self.backgroundColor=[UIColor clearColor];
+        
+        //Add tap gesture recognizer for activing and deactiving the view
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];  
     }
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame andImage:(NSString *)imageName//This is a convenience initializer (Note: self=[self...])
-{
-    self = [self initWithFrame:frame];
-    if (self) {
-        //Set to non-active
-        self.active=NO;
-        self.backgroundColor=[UIColor clearColor];
-                
-        //Add the imageView as a subview and size it to the same size than the view (self). To do that we get the view size from the CGRect frame passed to create the view
-        self.imageView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-        [self addSubview:self.imageView];
-        self.imageView.frame=CGRectMake(0, 0, frame.size.width, frame.size.height); 
-        self.imageView.contentMode=UIViewContentModeScaleAspectFit;
-        
-        //Add tap gesture recognizer for activing and deactiving the view
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
-    }
-    return self;
-}
 
 #pragma mark - Gesture recognizer handlers -
 
@@ -186,44 +177,23 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    if (self=[[ElementView alloc] initWithFrame:CGRectMake(0, 0, 100, 100) andImage:nil]) //This is the key element: to allocate the ElementView object. It means that we do not actually archive/unarchive the ElementView object, we do that only with the center position and the transform properties.
+    if (self=[super initWithCoder:aDecoder]) //[[ElementView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)]) // andImage:nil]) //This is the key element: to allocate the ElementView object. It means that we do not actually archive/unarchive the ElementView object, we do that only with the center position and the transform properties.
     {
-        //Get the imageView
-        self.imageView=[aDecoder decodeObjectForKey:@"Element.imageView"];
+        //Set ElementView properties
+        self.active=NO;
         
-        //Add the imageView to the topView
-        [self addSubview:self.imageView];
+        //Set UIView properties
+        self.backgroundColor=[UIColor clearColor];
         
-        self.labelText=[aDecoder decodeObjectForKey:@"ElementView.labelText"];
-        
-        //***
-        //If there is a text, then create and add the label
-        if ([self.labelText length]>0) {
-            if ([self.labelText isEqualToString:@"Void Label"]) { //The label is added to the other view
-                self.frame=CGRectZero;
-            }
-            else {
-                //Create label with the property text
-                UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-                label.text=self.labelText;
-                label.backgroundColor=[UIColor clearColor];
-                label.textAlignment=UITextAlignmentCenter;
-                
-                //Set the ElementView frame to the label frame
-                self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y, label.frame.size.width, label.frame.size.height);
-                
-                //Add as a subview
-                [self addSubview:label];
-            }
-        }
-        //***
-        
+        //Add tap gesture recognizer for activing and deactiving the view
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
         
         //Get the center position
         CGFloat x=[aDecoder decodeFloatForKey:@"Element.center.x"];
         CGFloat y=[aDecoder decodeFloatForKey:@"Element.center.y"];
         
-        self.center=CGPointMake(x, y);
+        //self.center=CGPointMake(x, y);
+        self.auxCenter=CGPointMake(x, y);
         
         //Get the transform values
         CGFloat a=[aDecoder decodeFloatForKey:@"Element.transform.a"];
@@ -233,16 +203,15 @@
         CGFloat tx=[aDecoder decodeFloatForKey:@"Element.transform.tx"];
         CGFloat ty=[aDecoder decodeFloatForKey:@"Element.transform.ty"];
         
-        self.transform=CGAffineTransformMake(a, b, c, d, tx, ty);
+        //self.transform=CGAffineTransformMake(a, b, c, d, tx, ty);
+        self.auxTransform=CGAffineTransformMake(a, b, c, d, tx, ty);
         
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [aCoder encodeObject:self.imageView forKey:@"Element.imageView"];
-    
+{    
     [aCoder encodeFloat:self.center.x forKey:@"Element.center.x"];
     [aCoder encodeFloat:self.center.y forKey:@"Element.center.y"];
     
@@ -252,8 +221,6 @@
     [aCoder encodeFloat:self.transform.d forKey:@"Element.transform.d"];
     [aCoder encodeFloat:self.transform.tx forKey:@"Element.transform.tx"];
     [aCoder encodeFloat:self.transform.ty forKey:@"Element.transform.ty"];
-    
-    [aCoder encodeObject:self.labelText forKey:@"ElementView.labelText"];
 }
 
 

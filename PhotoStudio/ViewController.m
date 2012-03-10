@@ -21,8 +21,6 @@
 @property (weak,nonatomic) ElementView *activeElementInTopView;
 @property (weak,nonatomic) ElementView *activeElementInFrontView;
 @property (weak, nonatomic) IBOutlet UILabel *titleInView;
-//@property (nonatomic, strong) UIAlertView *labelAlertView;
-//@property (nonatomic, strong) UIAlertView *removeElementAlertView;
 
 
 - (void)setupCurrentProject;
@@ -47,8 +45,6 @@
 @synthesize frontViewElements=_frontViewElements;
 @synthesize activeElementInTopView=_activeElementInTopView;
 @synthesize activeElementInFrontView=_activeElementInFrontView;
-//@synthesize labelAlertView=_labelAlertView;
-//@synthesize removeElementAlertView=_removeElementAlertView;
 
 
 #pragma mark - IBAction methods -
@@ -370,65 +366,54 @@
             //This element will have a visible view only in one view
             
             //Create the element
-            Element *labelElement=[[Element alloc] init];
-            UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-            label.text=[[alertView textFieldAtIndex:0] text];
-            label.backgroundColor=[UIColor clearColor];
-            label.textAlignment=UITextAlignmentCenter;
-            
+            Element *newElement=[[Element alloc] init];
             
             if (buttonIndex==0) { //Add only to top view
-                labelElement.topView=[[ElementView alloc] initWithFrame:label.frame andImage:nil];
-                [labelElement.topView addSubview:label];
-                labelElement.topView.labelText=label.text;
-                
-                labelElement.frontView=[[ElementView alloc] initWithFrame:CGRectZero];
-                labelElement.frontView.labelText=@"Void Label";
+                newElement.topView=[[LabelElement alloc] initWithFrame:CGRectMake(0, 0, 150, 40) andText:[[alertView textFieldAtIndex:0] text]];
+                newElement.frontView=[[LabelElement alloc] initWithFrame:CGRectZero andText:@"Void Label"];
             }
             if (buttonIndex==1) { //Add only to front view
-                labelElement.topView=[[ElementView alloc] initWithFrame:CGRectZero];
-                labelElement.topView.labelText=@"Void Label";
-                
-                labelElement.frontView=[[ElementView alloc] initWithFrame:label.frame andImage:nil];
-                [labelElement.frontView addSubview:label];
-                labelElement.frontView.labelText=label.text;
+                newElement.topView=[[LabelElement alloc] initWithFrame:CGRectZero andText:@"Void Label"];
+                newElement.frontView=[[LabelElement alloc] initWithFrame:CGRectMake(0, 0, 150, 40) andText:[[alertView textFieldAtIndex:0] text]];
             }
-            
-            
+             
             //Add element to elements array
-            [self.currentProject.elements addObject:labelElement];
+            [self.currentProject.elements addObject:newElement];
             
-            [self setupElement:labelElement];
+            [self setupElement:newElement];
             
             //Save updated current project
             [self.currentProject save];       
         }        
     }
     
-    if (alertView.tag==100) { //Remove element
-        //Delete selected element from views
-        [self.activeElementInTopView removeFromSuperview];
-        [self.activeElementInFrontView removeFromSuperview];
-        
-        //Delete selected element from arrays
-        [self.topViewElements removeObject:self.activeElementInTopView];
-        [self.frontViewElements removeObject:self.activeElementInFrontView];
-        
-        //Delete Element from project
-        //In order to do that, we have to get first the element that holds the active topView
-        for (Element *element in self.currentProject.elements) {
-            if (element.topView==self.activeElementInTopView) {
-                [self.currentProject.elements removeObject:element];
-                break;
+    if (alertView.tag==100) { 
+        if (buttonIndex==0) { //Remove element
+            
+            //Delete selected element from views
+            [self.activeElementInTopView removeFromSuperview];
+            [self.activeElementInFrontView removeFromSuperview];
+            
+            //Delete selected element from arrays
+            [self.topViewElements removeObject:self.activeElementInTopView];
+            [self.frontViewElements removeObject:self.activeElementInFrontView];
+            
+            //Delete Element from project
+            //In order to do that, we have to get first the element that holds the active topView
+            for (Element *element in self.currentProject.elements) {
+                if (element.topView==self.activeElementInTopView) {
+                    [self.currentProject.elements removeObject:element];
+                    break;
+                }
             }
+            
+            //Set actice elements to nil
+            self.activeElementInTopView=nil;
+            self.activeElementInFrontView=nil;
+            
+            //Save current project
+            [self.currentProject save];
         }
-        
-        //Set actice elements to nil
-        self.activeElementInTopView=nil;
-        self.activeElementInFrontView=nil;
-        
-        //Save current project
-        [self.currentProject save];
     }
 }
 
@@ -466,8 +451,6 @@
     [self setTitleInView:nil];
     _popover=nil;
     _currentProject=nil;
-    //_labelAlertView=nil;
-    //_removeElementAlertView=nil;
 }
 
 

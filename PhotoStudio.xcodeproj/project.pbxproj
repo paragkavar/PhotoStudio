@@ -39,6 +39,8 @@
 		E89B34AE1502DA7B00740636 /* ElementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E89B34AD1502DA7B00740636 /* ElementsTableViewController.m */; };
 		E89B34B11502DC3900740636 /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = E89B34B01502DC3900740636 /* Element.m */; };
 		E8CCFC341508267600AC9B81 /* ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CCFC331508267600AC9B81 /* ImageHelper.m */; };
+		E8CFC3F0150AB8770054DE7D /* ImageElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CFC3EF150AB8770054DE7D /* ImageElement.m */; };
+		E8CFC3F4150ABE290054DE7D /* LabelElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CFC3F3150ABE290054DE7D /* LabelElement.m */; };
 		E8DF5D7415057EB50063D162 /* Cars.BMW.front.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DF5D6E15057EB50063D162 /* Cars.BMW.front.png */; };
 		E8DF5D7515057EB50063D162 /* Cars.BMW.top.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DF5D6F15057EB50063D162 /* Cars.BMW.top.png */; };
 		E8DF5D7615057EB50063D162 /* Cars.Porsche.front.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DF5D7015057EB50063D162 /* Cars.Porsche.front.png */; };
@@ -106,6 +108,10 @@
 		E89B34B01502DC3900740636 /* Element.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Element.m; sourceTree = "<group>"; };
 		E8CCFC321508267600AC9B81 /* ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHelper.h; sourceTree = "<group>"; };
 		E8CCFC331508267600AC9B81 /* ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHelper.m; sourceTree = "<group>"; };
+		E8CFC3EE150AB8770054DE7D /* ImageElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageElement.h; sourceTree = "<group>"; };
+		E8CFC3EF150AB8770054DE7D /* ImageElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageElement.m; sourceTree = "<group>"; };
+		E8CFC3F2150ABE290054DE7D /* LabelElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelElement.h; sourceTree = "<group>"; };
+		E8CFC3F3150ABE290054DE7D /* LabelElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelElement.m; sourceTree = "<group>"; };
 		E8DF5D6E15057EB50063D162 /* Cars.BMW.front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cars.BMW.front.png; sourceTree = "<group>"; };
 		E8DF5D6F15057EB50063D162 /* Cars.BMW.top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cars.BMW.top.png; sourceTree = "<group>"; };
 		E8DF5D7015057EB50063D162 /* Cars.Porsche.front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cars.Porsche.front.png; sourceTree = "<group>"; };
@@ -252,6 +258,10 @@
 				346C56B0150601000068DC32 /* ElementView.m */,
 				346C56B7150612970068DC32 /* Project.h */,
 				346C56B8150612970068DC32 /* Project.m */,
+				E8CFC3EE150AB8770054DE7D /* ImageElement.h */,
+				E8CFC3EF150AB8770054DE7D /* ImageElement.m */,
+				E8CFC3F2150ABE290054DE7D /* LabelElement.h */,
+				E8CFC3F3150ABE290054DE7D /* LabelElement.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -413,6 +423,8 @@
 				34B96A8315075F1A002D6A1A /* NewProjectSTVC.m in Sources */,
 				E865F0FD1507C51300B5AFEE /* EditProjectSTVC.m in Sources */,
 				E8CCFC341508267600AC9B81 /* ImageHelper.m in Sources */,
+				E8CFC3F0150AB8770054DE7D /* ImageElement.m in Sources */,
+				E8CFC3F4150ABE290054DE7D /* LabelElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

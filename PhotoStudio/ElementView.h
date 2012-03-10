@@ -20,10 +20,9 @@
 
 @property (nonatomic,weak) id <ElementViewDelegate> delegate;
 @property (nonatomic, readwrite) BOOL active;
-@property (nonatomic,strong) UIImageView *imageView;
-@property (nonatomic, strong) NSString *labelText;
 
-- (id)initWithFrame:(CGRect)frame andImage:(NSString *)imageName;
+@property (nonatomic, readwrite) CGAffineTransform auxTransform;
+@property (nonatomic, readwrite) CGPoint auxCenter;
 
 - (CGPoint)getCenterInBetweenLimits;
 - (BOOL)isElementBetweenLimits;
