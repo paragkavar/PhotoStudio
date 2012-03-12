@@ -21,6 +21,7 @@
 		E812402F150689CE00C08614 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = E812402E150689CE00C08614 /* trash.png */; };
 		E81E84F01508E48A00015FC9 /* default image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E81E84EF1508E48A00015FC9 /* default image.jpg */; };
 		E865F0FD1507C51300B5AFEE /* EditProjectSTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E865F0FC1507C51300B5AFEE /* EditProjectSTVC.m */; };
+		E871E9E9150DF9B800807223 /* PhotoStudio Project.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E871E9E8150DF9B800807223 /* PhotoStudio Project.rtf */; };
 		E89B34731502CECD00740636 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34721502CECD00740636 /* UIKit.framework */; };
 		E89B34751502CECD00740636 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34741502CECD00740636 /* Foundation.framework */; };
 		E89B34771502CECD00740636 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89B34761502CECD00740636 /* CoreGraphics.framework */; };
@@ -80,6 +81,7 @@
 		E81E84EF1508E48A00015FC9 /* default image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default image.jpg"; sourceTree = "<group>"; };
 		E865F0FB1507C51300B5AFEE /* EditProjectSTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProjectSTVC.h; sourceTree = "<group>"; };
 		E865F0FC1507C51300B5AFEE /* EditProjectSTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProjectSTVC.m; sourceTree = "<group>"; };
+		E871E9E8150DF9B800807223 /* PhotoStudio Project.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "PhotoStudio Project.rtf"; sourceTree = "<group>"; };
 		E89B346E1502CECD00740636 /* PhotoStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89B34721502CECD00740636 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E89B34741502CECD00740636 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -198,6 +200,7 @@
 		E89B34781502CECD00740636 /* PhotoStudio */ = {
 			isa = PBXGroup;
 			children = (
+				E871E9E8150DF9B800807223 /* PhotoStudio Project.rtf */,
 				E8CCFC301508265400AC9B81 /* Helper classes */,
 				E8DF5D7C150580170063D162 /* View Controllers */,
 				E8DF5D7B15057FD60063D162 /* Model */,
@@ -376,6 +379,7 @@
 				E812402F150689CE00C08614 /* trash.png in Resources */,
 				E81E84F01508E48A00015FC9 /* default image.jpg in Resources */,
 				343681F8150A59930033F132 /* label icon.png in Resources */,
+				E871E9E9150DF9B800807223 /* PhotoStudio Project.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

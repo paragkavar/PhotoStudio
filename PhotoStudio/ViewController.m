@@ -179,7 +179,7 @@
     [self.topView addSubview:element.topView];
     [self.frontView addSubview:element.frontView];
     
-    //Add gesture recognizer to each view for dragging the view
+    //Add pan gesture recognizer to each view for dragging the view
     [element.topView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanInTopView:)]];
     [element.frontView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanInFrontView:)]];
     
@@ -436,14 +436,18 @@
     
     //Init project elements array
     self.currentProject.elements=[NSMutableArray arrayWithCapacity:1];
+    
+    [self loadCurrentProject];
 }
 
 //CAUTION here when returning from the popover (Projects or elements)
 //CHECKED: This method is not called when dismissing the popover
 - (void)viewDidAppear:(BOOL)animated
 {
+    //[super viewDidAppear:NO];
+    
     //Load current project
-    [self loadCurrentProject];
+    //[self loadCurrentProject];
 }
 
 - (void)viewDidUnload
